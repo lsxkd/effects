@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		var box = [1,1,2,2,3,4,5,6,6]
+
+
+		//******方法一******
+		
+
+
+		// Array.prototype.arrays = function(){
+		// 	this.sort();
+		// 	var res = [this[0]];
+		// 	for(var i=1;i<this.length;i++){
+		// 		if(this[i] !== res[res.length-1]){
+		// 			res.push(this[i]);
+		// 		}
+		// 	}
+		// 	return res;
+		// }
+
+		function array1(arr){
+			arr.sort();
+			var res = [arr[0]];
+			for(var i=1;i<arr.length;i++){
+				if(arr[i] !== res[res.length-1]){
+					res.push(arr[i]);
+				}
+			}
+			return res;
+		}
+		console.log("方法一")
+		console.log(array1(box))
+
+
+
+
+		//******方法二******
+
+		function array2(arr2){
+			var res2 = [arr2[0]];
+			for(var i = 1;i < arr2.length;i++){
+				var repeat = false;
+				for(var j = 0;j < res2.length;j++){
+					if(arr2[i] == res2[j]){
+						repeat = true;
+						break;
+					}
+				}
+				if(!repeat){
+					res2.push(arr2[i]);
+				}
+			}
+			return res2;
+
+		}
+		console.log("方法二")
+		console.log(array2(box))
+
+
+
+
+		//******方法三******
+		function array3(arr3){
+			var res3 = [];
+			var jsons = {};
+			for(var i = 0;i < arr3.length;i++){
+				if(!jsons[arr3[i]]){
+					res3.push(arr3[i]);
+					jsons[arr3[i]] = 1;
+				}
+			}
+			return res3;
+		}
+
+		console.log("方法三");
+		console.log(array3(box))
+
+
+
+	</script>
+</body>
+</html>

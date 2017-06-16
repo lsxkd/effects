@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<script src="http://test.yidiandian.net/business_union/resources/js/jQueryUtil/jquery.js"></script>
+	<style rel="stylesheet">
+		*{padding: 0;margin: 0;}
+		table{width:100%;}
+		td{padding:10px 0;text-align:center;background:#ccc;border:1px solid #fff;}
+		#myInput{ line-height:30px;}
+		#myInput:after{content:"";display:block;clear:both;}
+		span{float:left;height:30px;margin:0;line-height:30px;}
+		em{height:20px;border-left:1px solid #ccc;float:left;
+			animation: identifier 1s infinite;
+			-moz-animation: identifier 1s infinite;	
+			-webkit-animation: identifier 1s infinite;	
+			-o-animation: identifier 1s infinite;}
+
+		@-webkit-keyframes identifier {
+			0% { border-color:transparent; }
+			50% { border-color:transparent; }
+			100% { border-color:#ccc; }
+		}
+		@-o-keyframes identifier {
+			0% { border-color:transparent; }
+			50% { border-color:transparent; }
+			100% { border-color:#ccc; }
+		}
+		@-moz-keyframes identifier {
+			0% { border-color:transparent; }
+			50% { border-color:transparent; }
+			100% { border-color:#ccc; }
+		}
+		@keyframes identifier {
+			0% { border-color:transparent; }
+			50% { border-color:transparent; }
+			100% { border-color:#ccc; }nt; }
+			to { border-color:#ccc; }
+		}
+	</style>
+	<title>模拟键盘输入</title>
+</head>
+<body>
+	<!-- 模拟文本框 -->
+	<div id="myInput"><span>1</span><span>2</span><span>3</span><span>4</span><em></em></div>
+
+	<!-- 模拟键盘 -->
+	<table>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+		</tr>
+		<tr>
+			<td>.</td>
+			<td>0</td>
+			<td>c</td>
+		</tr>
+	</table>
+	<script>
+		
+		$("#myInput span").live("touchstart",function(e){
+
+			//点击数字，清除原有“光标”
+			$("#myInput em").remove();
+
+			//点击数字前添加“光标”
+			$(this).before("<em></em>");
+
+			//阻止冒泡
+			e.stopPropagation();
+		});
+		$("#myInput").live("touchstart",function(){
+			// 点击文本框清除原有“光标”
+			$("#myInput em").remove();
+
+			//文本框最后添加“光标”
+			$(this).append("<em></em>")
+		})
+
+		$("table td").live("touchend",function(e){
+			// 点击“按键”时,清空变量；
+			var val="";
+
+			// 取得文本框里的值；
+			$("#myInput span").each(function(){
+				val+=$(this).html();
+			})
+
+			// 如果点击的是“小数点”
+			if($(this).html()=="."){
+
+				// 如果光标位置处在最后两位数字前，则点击无效；
+				if($("#myInput em").index()<($("#myInput span:last").index()-2)) return;
+
+				// 如果文本框已有小数点，刚点击无效
+				if(!/\./.test(val)) $("#myInput").find("em").before("<span>"+$(this).html()+"</span>");
+
+				// 如果点击的是C
+			}else if($(this).html()=="c"){
+
+				// 删除光标前的数字；
+				$("#myInput em").prev("span").remove();
+			}else{
+
+				// 其它按键
+				// 如果文本框内有两位数小数点
+				if(/\.\d{2}/.test(val)){
+
+					// 若光标处于小数点之后，点击无效
+					if($("#myInput em").index()>($("#myInput span:last").index()-3)) return;
+
+					// 在光标前插入对应数字
+					$("#myInput").find("em").before("<span>"+$(this).html()+"</span>");
+				}else{
+
+					// 若没有或小数点位数不足两位，在光标前插入数字;
+					$("#myInput").find("em").before("<span>"+$(this).html()+"</span>");
+				}
+				
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-2.1.1.js" ></script>
+	<style>
+		html,body,div{margin:0;padding:0;}
+		html,body{width:100%;height:100%;}
+		.body{width:100%;height:100%;background:#ccc;position:relative;}
+		.point_red{display:none;width:5px;height:5px;background:red;position: absolute;}
+		.point_red1{display:none;width:5px;height:5px;background:red;position: absolute;}
+		.point_red2{display:none;width:5px;height:5px;background:red;position: absolute;}
+		.body_box{position: absolute;left:100px;top:100px;}
+		.body_box1{position: absolute;left:100px;top:200px;}
+	</style>
+	<script>
+		$(function(){
+			var pointss = [];
+			var ss;
+			$(".body").click(function(){
+				var points = [];
+				var x=event.offsetX;
+				var y=event.offsetY;
+				var z="x:"+x+",Y:"+y;
+				console.log(z)
+				points.push(x,y);
+				//console.log(points)
+				pointss.push(points)
+				console.log(pointss)
+				var p1 = pointss[pointss.length-1];
+				var p2 = pointss[pointss.length-2];
+				var p3 = pointss[pointss.length-3];
+				var x1 = p1[0];
+				var y1 = p1[1];
+				var x2 = p2[0];
+				var y2 = p2[1];
+				var x3 = p3[0];
+				var y3 = p3[1];
+				if(pointss.length >= 3){
+					var a = p2[0] - p1[0];
+			  		var b = p2[1] - p1[1];
+				  	ss = Math.sqrt(a*a+b*b);
+				  	$(".body_box").empty().append("最后一次点击的坐标："+p1[0]+"&nbsp;"+p1[1]+"<br />"+"倒数第二次点击的坐标："+p2[0]+"&nbsp;"+p2[1]);
+				  	$(".body_box1").empty().append("最后两次鼠标点击之间的距离为："+ss); 	
+				  	$(".point_red").css({"display":"block","left":p1[0],"top":p1[1]});
+					$(".point_red1").css({"display":"block","left":p2[0],"top":p2[1]});
+					$(".point_red2").css({"display":"block","left":p3[0],"top":p3[1]});
+					setTimeout(function(){
+						var myCanvas = document.getElementById("myCanvas");
+						var context = myCanvas.getContext("2d");
+						context.fillStyle ='rgba(255,0,0,.3)';//填充颜色：红色，半透明
+						context.strokeStyle ='hsl(120,50%,50%)';//线条颜色：绿色
+						context.lineWidth = 2;//设置线宽
+						context.beginPath();
+						context.moveTo(x1,y1);
+						context.lineTo(x2,y2);
+						context.lineTo(x3,y3);
+						context.closePath();//可以把这句注释掉再运行比较下不同
+						context.stroke();//画线框
+						context.fill();//填充颜色
+						console.log(p1[0])
+					},20)
+				}				
+				
+			})
+
+			
+			
+		})
+	</script>
+</head>
+<body>
+	<div class="body">
+		<div class="body_box"></div>
+		<div class="body_box1"></div>
+		<div class="point_red"></div>
+		<div class="point_red1"></div>
+		<div class="point_red2"></div>
+
+		<canvas id = "myCanvas"  width = '5000' height = '5000'>Canvas画线技巧</canvas>
+  <script>
+   
+  </script>
+	</div>
+	
+</body>
+</html>

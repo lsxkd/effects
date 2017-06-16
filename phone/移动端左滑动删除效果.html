@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>Document</title>
+	<style rel="stylesheet">
+		*{padding:0;margin:0px}
+		ul li{list-style-type:none;}
+		#wrap{width:600px;height:400px;border:1px solid #ccc;position:relative;left:0;top:0;margin:50px auto;}
+		section{width:100%;overflow:hidden;}
+		.wrap_move{height:40px;line-height:40px;padding-left:15px;background:#ccc;font-size:16px;cursor:move;}
+		section li{height:2rem;width:100%;line-height:2rem;border-bottom:1px solid #ccc;padding:0 0 0 2rem;position:relative;left:0;}
+		section li:before{content:"";height:100%;width:2rem;background:#ccc;position:absolute;left:0;top:0;}
+		section li:after{content:"";height:100%;width:2rem;background:red;position:absolute;right:0;top:0;}
+
+
+
+	</style>
+	<script src="http://test.yidiandian.net/business_union/resources/js/jQueryUtil/jquery.js"></script>
+</head>
+<body>
+	<section class="mySelect">
+		<ul>
+			<li><span>测试文字测试文字测试文字</span></li>
+			<li><span>测试文字测试文字测试文字</span></li>
+			<li><span>测试文字测试文字测试文字</span></li>
+			<li><span>测试文字测试文字测试文字</span></li>
+			<li><span>测试文字测试文字测试文字</span></li>
+		</ul>
+	</section>
+	<script>
+		$(function(){
+			$("section li").bind("touchstart",function(e){
+				start_x = e.originalEvent.targetTouches[0].clientX;
+				start_y = e.originalEvent.targetTouches[0].clientY;
+				$(".moveThisLi").removeClass("moveThisLi");
+				$(this).addClass("moveThisLi");
+				fontSize=$(this).css("font-size");
+				pad=parseInt(fontSize)*2;
+			})
+			$("section li").bind("touchmove",function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				var moveX=e.originalEvent.targetTouches[0].clientX;
+				var tran_x=moveX-start_x;
+
+				$(this).css({
+					"left": parseInt($(this).css("left"))+tran_x+"px"
+				})
+				fn=parseInt($(this).css("left"));
+				console.log(fn);
+				if(fn<-pad){
+ 					$(this).css("left",-pad);
+				}else if(fn>0){
+ 					$(this).css("left",0);
+				}
+			})
+			 $(document).bind("touchend",function(e){
+			 	if(parseInt($(".moveThisLi").css("left"))>=-parseInt(fontSize)){
+			 		$(".moveThisLi").css("left",0)
+			 		console.log(2);
+			 	}else if(parseInt($(".moveThisLi").css("left"))<-parseInt(fontSize)){
+			 		$(".moveThisLi").css("left",-pad).siblings("li").animate({
+			 			"left":0
+			 		})
+			 	}
+
+			 	if(e.originalEvent.changedTouches[0].clientY>$(".mySelect").outerHeight()){
+			 		$(".mySelect li").animate({
+			 			"left":0
+			 		})
+			 	}
+			 })
+		})
+	</script>
+</body>
+</html>

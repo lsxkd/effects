@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-2.1.1.js"></script>
+	<style type="text/css" rel="stylesheet">
+		*{padding:0;margin: 0;}
+		body{padding:30px;font-family: "微软雅黑";font-size:14px;}
+	</style>
+
+</head>
+<body>
+	<div id="test" style="width:600px;margin:0 auto">
+		<h2 style="text-align:center">半醉不醉的人生是一种生活的态度</h2>
+		<p style="text-align:right"><small>20150521<span style="margin-left:10px">陈正</span></small></p>
+		<br>
+		<p style="text-indent:2em">清醒是一种痛苦，昏睡是一种无知，半醉不醉的人生是一种生活的态度;对人，不能苛刻，当清则清，当胡涂则糊涂;对事，不能苛求，当轻则轻，当认真则认真;对情，不能看重，当明则明，当放手则放手;对爱，不能太痴，当放弃则放弃。</p>
+		<p style="text-indent:2em">就算你做得再好，也会有人指指点点;即便你一塌糊涂，亦能听到赞歌。不必纠结于外界的评判，不必掉进他人的眼神，不必为了讨好这个世界而扭曲了自己。能够拯救你的，只能是你自己。</p>
+		<p style="text-indent:2em">总有起风的清晨，总有绚烂的黄昏，总有流星的夜晚;不管昨天、今天、明天，能豁然开朗，就是美好的一天;不管亲情、友情、爱情，能永远珍惜，就是好心情;从某种意义上说，一个人心中有什么，他看到的就是什么;只有真正的贤者，才能不被物质生活所累，才能始终保持尽境的那份恬淡和安宁。</p>
+		<p style="text-indent:2em">生活，就是心怀最大的善意在荆棘中穿行，即使被刺伤，亦不改初衷;这世界，没有我们想象的美好，各种恶人各种诋毁各种打击各种敌对，但永远不要放弃对世界的善意，不要让恶人把自己变成恶人，不要让挫折拿走生活的勇气;不论周围的人如何刺伤身体，心中仍然要充盈善意，这样，自己不痛，与人无伤。</p>
+	</div>
+	<script>
+		// 代码开始
+		  // 获取要输出的内容
+		  var str=$("#test").html();
+	      // 合并多个空格;
+	      str=str.replace(/(\s){2,}/g," ");
+	      	// 定义变量为于表示位数
+	      	var index = 0;
+	        // 清空内容
+	        $("#test").html('');
+	        // 输出函数
+	        var documentWrite = function() {
+	        	// 逐字输出
+	        	var current = str.slice(index, index+1);
+	        	if (current == '<'){
+	        		index = str.indexOf('>', index) + 1;
+	        	}
+	        	else{
+	        		index++;
+	        	}
+	            // 不是最后两位时输出后追加下划线
+	            if (index < str.length-1){ 
+	            	$("#test").html(str.substring(0, index) + (index & 1 ? '_' : ''));
+	            }else{
+	            	// 内容输出完后清除定时器
+	            	$("#test").html(str.substring(0, index));
+	            	clearInterval(documentWrite);
+	            };
+	        };
+	        // 定时器,每200毫秒输出一个字
+	        setInterval(documentWrite,75);
+
+	    </script>
+
+	</body>
+	</html>
