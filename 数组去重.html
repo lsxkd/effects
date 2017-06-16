@@ -5,6 +5,19 @@
 	<title>Document</title>
 </head>
 <body>
+	
+	<p>数组：[1,1,2,2,3,4,5,6,6]</p>
+
+
+	<p>方法一：</p>
+	<p id="one"></p>
+	<br><br><br>
+
+	<p>方法二：</p>
+	<p id="two"></p>
+	<br><br><br>
+	<p>方法三：</p>
+	<p id="three"></p>
 	<script>
 
 		var box = [1,1,2,2,3,4,5,6,6]
@@ -37,6 +50,7 @@
 		}
 		console.log("方法一")
 		console.log(array1(box))
+		document.getElementById("one").innerHTML = array1(box)
 
 
 
@@ -62,6 +76,7 @@
 		}
 		console.log("方法二")
 		console.log(array2(box))
+		document.getElementById("two").innerHTML = array1(box)
 
 
 
@@ -81,6 +96,7 @@
 
 		console.log("方法三");
 		console.log(array3(box))
+		document.getElementById("three").innerHTML = array1(box)
 
 
 
