@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	body, html{width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	#allmap {width:600px;height:400px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=34lczXtIwLp5RoLXkEqqXVvT"></script>
+	<script src="jquery-1.9.1.js"></script>
+	<script src="provinceCity.js"></script>
+	<title>地图展示</title>
+</head>
+<body>
+	<select id="province" onchange="chpro(this.value)">
+	</select>
+	<select id="city" onchange="chcity(this.value)">
+	</select>
+	<select id="area">
+	</select>
+	<input type="text" id="address">
+	<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		bMap({
+			searchInput:"address", 			// 搜索框ID，默认为 address
+			// point:{lat:116.404,lng:39.915}, //根据经纬度加载地图
+			address:"芒果网大厦"  			//根据地址加载地图
+		})
+		//
+		// bMap({
+		// 	searchInput:"address", 			// 搜索框ID，默认为 address
+		// 	// point:{lat:116.404,lng:39.915}, //根据经纬度加载地图
+		// 	address:"芒果网大厦",  			//根据地址加载地图
+		// 	clicks:false,		  			//是否开启点击重新定位,默认开启
+		// 	wheelZoom:false,	   			//是否开启滚轮缩放,默认开启
+		// 	doubleClickZoom:false,			//是否设置双击放大,默认开启
+		// 	dragging:false,		   			//是否设置拖动,默认开启,
+		// 	enableMapClick:false   			//是否开启标注提示,默认开启
+		// })
+	})
+	function bMap(o){
+		function isO(types){
+			if(!o) return false;
+			if(o[types]!=undefined) return true;
+			return false;
+		}
+
+		var searchInput=isO("searchInput") ? o.searchInput : "address",
+
+			// 判断是否开启点击重新定位
+			map_clicks=isO("clicks") ? o.clicks : true,
+			// 判断是否开启滚动缩放
+			map_wheelZoom=isO("wheelZoom") ? o.wheelZoom : true,
+			// 判断是否开启双击放大
+			map_doubleClickZoom=isO("doubleClickZoom") ? o.doubleClickZoom : true,
+			// 判断是否开启拖动
+			map_dragging=isO("dragging") ? o.dragging : true,
+			// 判断是否开启提示窗
+			map_enableMapClick=isO("enableMapClick") ? o.enableMapClick :true;
+			// 设置经纬度
+			map_point=isO("point") ? o.point : {lat:22.529466,lng:113.941477};
+			// 设置地址;
+			map_add=isO("address") ? o.address : "芒果网大厦";
+
+
+		// 地图主体
+		var map = new BMap.Map("allmap", {enableMapClick: map_enableMapClick});    // 创建Map实例
+
+		// if()
+
+		if(isO("point")){
+			// map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+			map.centerAndZoom(new BMap.Point(map_point.lat, map_point.lng), 11);
+		}else{
+			try {
+				map.centerAndZoom(map_add, 18)
+			}catch(e){
+				console.log(1);
+			}
+
+		}
+
+		// 创建标注
+		// map.addOverlay(new BMap.Marker("芒果网大厦"),18);
+
+		var setT=0;
+		map_t=setInterval(function(){
+			setT++;
+			var points={
+				point:map.getCenter()
+			}
+			if(setT=50){
+				clearInterval(map_t);
+				map.centerAndZoom("芒果网大厦", 18)
+			}
+			if(points.point.lng!=0&&points.point.lat!=0){
+				showInfo(points);
+				clearInterval(map_t);
+			}
+		},10)
+
+		// 控件设置
+		map_wheelZoom ? map.enableScrollWheelZoom(true) : map.disableScrollWheelZoom(true);   		//判断是否开启鼠标滚轮缩放
+		map_dragging ? map.enableDragging(true) : map.disableDragging(true);  				  		//判断是否开启拖动
+		map_doubleClickZoom ? map.enableDoubleClickZoom(true) : map.disableDoubleClickZoom(true);   //判断是否开启双击放大
+
+		// 是否开启点击重新定位
+		if(map_clicks){
+			map.addEventListener("click", function(e){
+				showInfo(e);
+				addresssAnaly(e.point,0);
+			});
+		}
+
+		// 添加带有定位的导航控件
+		var navigationControl = new BMap.NavigationControl({
+			// 靠左上角位置
+			anchor : BMAP_ANCHOR_TOP_LEFT,
+			// LARGE类型
+			type : BMAP_NAVIGATION_CONTROL_LARGE,
+			// 启用显示定位
+			enableGeolocation : true
+		});
+		map.addControl(navigationControl);
+
+
+		// 联想搜索
+		function addressSearch(InputId, addressDetail) {
+			var ac = new BMap.Autocomplete( // 建立一个自动完成的对象
+			{
+				"input" : InputId,
+				"location" : map
+			});
+			ac.addEventListener("onhighlight", function(e) { // 鼠标放在下拉列表上的事件
+				var str = "";
+				var _value = e.fromitem.value;
+				var value = $("#"+searchInput).val()||"";
+				if (e.fromitem.index > -1) {
+					value = _value.province + _value.city + _value.district
+							+ _value.street + _value.business;
+				}
+				str = "FromItem<br />index = " + e.fromitem.index + "<br />value = "
+						+ value;
+
+				value = "";
+				if (e.toitem.index > -1) {
+					_value = e.toitem.value;
+					value = _value.province + _value.city + _value.district
+							+ _value.street + _value.business;
+				}
+				str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = "
+						+ value;
+			});
+			ac.addEventListener("onconfirm", function(e) { // 鼠标点击下拉列表后的事件
+				var _value = e.item.value;
+				myValue = _value.province + _value.city + _value.district
+						+ _value.street + _value.business;
+				setPlace();
+			});
+		}
+
+		// 执行搜索
+		addressSearch(searchInput);
+
+
+		// 设置中心点；
+		function setPlace() {
+			map.clearOverlays(); // 清除地图上所有覆盖物
+			function myFun() {
+				var firstSearch = local.getResults().getPoi(0).point; // 获取第一个智能搜索的结果
+				map.centerAndZoom(firstSearch, 18);
+				map.addOverlay(new BMap.Marker(firstSearch)); // 添加标注
+
+				// 获取地址
+				addresssAnaly(firstSearch,0);
+			}
+			var local = new BMap.LocalSearch(map, { // 智能搜索
+				onSearchComplete : myFun
+			});
+			local.search(myValue);
+
+		}
+
+		// 根据经纬度设置中心点
+		function showInfo(e){
+			new BMap.Point(e.point.lng,e.point.lat)
+			var lng = e.point.lng;
+			var lat = e.point.lat;
+			var isLoadLngAndLat = lng == "" ? 1 : 0;
+			if(isLoadLngAndLat == "0" && lng != null && lng != ""){
+				e.point.lng = lng;
+				e.point.lat = lat;
+				isLoadLngAndLat = 1;
+			}
+			theLocation(e.point.lng,e.point.lat);
+		}
+
+
+		// 用经纬度添加描点
+		function theLocation(lng, lat) {
+			if (lng != "" && lat != "") {
+				map.clearOverlays();
+				var new_point = new BMap.Point(lng, lat);
+				marker = new BMap.Marker(new_point); // 创建标注
+				map.addOverlay(marker); // 将标注添加到地图中
+				map.panTo(new_point);
+
+			}
+		}
+
+
+		//过滤有市辖区的地址
+
+	    function addresssAnaly(pp, isShowAddress) {
+	    	var geoc = new BMap.Geocoder();
+	    	geoc.getLocation(pp, function(rs) {
+	    		var addComp = rs.addressComponents;
+	    		$("#province").val(addComp.province);
+	    		 chpro(addComp.province);
+	    		var c = addComp.city;
+	    		if (c == "北京市" || c == "天津市" || c == "重庆市" || c == "上海市") {
+	    			c = "市辖区";
+	    			$("#city").val(c);
+	    			chcity(c);
+	    		} else {
+	    			$("#city").val(addComp.city);
+	    			 chcity(addComp.city);
+	    		}
+
+	    		addressDetail = addComp.street + addComp.streetNumber;
+	    		if (isShowAddress == "0") {
+	    			$("#address").val(addressDetail);
+	    		}
+	    		var lat = $("#lat").val();
+	    		district = addComp.district;
+	    		$("#area").find("option[value='" + district + "']").attr("selected",
+	    				true);
+	    		$("#area").val(district);
+	    	});
+	    }
+	}
+// var map = new BMap.Map("allmap", {});
+
+</script>
