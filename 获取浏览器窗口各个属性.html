@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function windowStyle(){
+			document.writeln("<br>网页可见区域宽:" + document.body.clientWidth);
+			document.writeln("<br>网页可见区域高:" + document.body.clientHeight);
+			document.writeln("<br>网页可见区域宽:" + document.body.offsetWidth);
+			document.writeln("<br>网页可见区域高:" + document.body.offsetHeight);
+			document.writeln("<br>网页正文全文宽:" + document.body.scrollWidth);
+			document.writeln("<br>网页正文全文高:" + document.body.scrollHeight);
+			document.writeln("<br>网页被卷去的高:" + document.body.scrollTop);
+			document.writeln("<br>网页被卷去的左:" + document.body.scrollLeft);
+			document.writeln("<br>网页正文部分上:" + window.screenTop);
+			document.writeln("<br>网页正文部分左:" + window.screenLeft);
+			document.writeln("<br>屏幕分辨率的高:" + window.screen.height);
+			document.writeln("<br>屏幕分辨率的宽:" + window.screen.width);
+			document.writeln("<br>屏幕可用工作区高度:" + window.screen.availHeight);
+			document.writeln("<br>屏幕可用工作区宽度:" + window.screen.availWidth);
+		}
+		windowStyle();
+	</script>
+</body>
+</html>
