@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D旋转</title>
+	<style rel="stylesheet">
+		.box{position:relative;transform-style: preserve-3d;perspective-origin: center center;width: 128px;height:200px;}
+		img{width:256px;height:200px;}
+		a{position:absolute;width:128px;height:200px;}
+		a:nth-child(1) { transform: rotateY(0deg) translateZ(180px);}
+		a:nth-child(2) { transform: rotateY(40deg) translateZ(180px);}
+		a:nth-child(3) { transform: rotateY(80deg) translateZ(180px);} 
+		a:nth-child(4) { transform: rotateY(120deg) translateZ(180px);}
+		a:nth-child(5) { transform: rotateY(160deg) translateZ(180px);}
+		a:nth-child(6) { transform: rotateY(200deg) translateZ(180px);}
+		a:nth-child(7) { transform: rotateY(240deg) translateZ(180px);}
+		a:nth-child(8) { transform: rotateY(280deg) translateZ(180px);}
+		a:nth-child(9) { transform: rotateY(320deg) translateZ(180px);}
+	</style>
+</head>
+<body>
+	<div style="perspective: 1000px;margin:200px auto;width:300px">
+		<div class="box" style="transform: rotateX(-10deg) rotateY(0);">
+			<a href="#"><img src="images/1.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/2.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/3.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/4.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/5.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/6.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/7.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/8.jpg" ondragstart="return false"></a>
+			<a href="#"><img src="images/9.jpg" ondragstart="return false"></a>
+		</div>
+	</div>
+	<script>
+		var box=document.getElementsByClassName("box")[0];
+		document.body.onmousewheel = function(event) {
+		    event = event || window.event;
+		    var divs=document.getElementsByTagName("div")[0];
+		    if(event.wheelDelta<0){
+		    	divs.style.perspective=parseFloat(parseFloat(divs.style.perspective.substring(0,divs.style.perspective.length-2))+100)+"px";
+		    }else{
+		    	divs.style.perspective=parseFloat(parseFloat(divs.style.perspective.substring(0,divs.style.perspective.length-2))-100)+"px";
+		    }
+		};
+		window.onload=function(){
+			move=false;
+			box.onmousedown=function(e){
+				mouse={
+					x:e.clientX,
+					y:e.clientY
+				};
+				var rotatex=parseFloat(splits(box.style.transform)[0]),
+					rotatey=parseFloat(splits(box.style.transform)[1]);
+					console.log(rotatex)
+				Move=true;
+				window.onmousemove=function(e){
+					if(Move){
+						var mous={
+							x:e.clientX-mouse.x,
+							y:mouse.y-e.clientY
+						}
+						document.getElementsByClassName("box")[0].style.transform="rotateX("+parseFloat(rotatex+mous.y)+"deg) rotateY("+parseFloat(rotatey+mous.x)+"deg)";
+					}
+				}
+			}
+			window.onmouseup=function(){
+				Move=false
+			}
+		}
+		function splits(str){
+			var arr=str.split(" ");
+			for(var i=0;i<arr.length;i++){
+				arr[i]=parseFloat(arr[i].substring(8,arr[i].length-4))
+			}
+			return arr
+		}
+
+
+		setInterval(function(){
+			var rotatex=parseFloat(splits(box.style.transform)[0]),
+				rotatey=parseFloat(splits(box.style.transform)[1]);
+			document.getElementsByClassName("box")[0].style.transform="rotateX("+parseFloat(rotatex)+"deg) rotateY("+parseFloat(rotatey+1)+"deg)";
+		},30)
+	</script>
+</body>
+</html>
