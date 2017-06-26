@@ -5,6 +5,8 @@ $(function(){
 	var oDate = new Date();//获取年月日时分秒
 	yearss = oDate.getFullYear();//获取年份
 	monthss= oDate.getMonth()+1;//获取月份
+	$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
+	$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
 	$(document).on("click",".title_left_click",function(){//点击按钮月份减一
 		if(monthss==1){
 			yearss--;
