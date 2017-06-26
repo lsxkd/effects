@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间选择控件</title>
+	<link rel="stylesheet" href="css/date_style.css">
+	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/date_js.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main">
+			<input type="text" class="strat_times" placeholder="YYYY-MM-DD hh:mm:ss" readonly> -- <input type="text" class="end_times" placeholder="YYYY-MM-DD hh:mm:ss" readonly>
+		</div>
+
+		<div class="pop_times">
+			<div class="pop_times_top">
+				<div class="pop_times_top_g pop_times_top_ye">
+					<a class="times_top_g_a times_top_g_a_l" href="javascript:void(0);">
+						<cite></cite>
+					</a>
+					<input type="text" class="times_top_g_input" placeholder="2017年" readonly>
+					<label ></label>
+					<a class="times_top_g_a times_top_g_a_r" href="javascript:void(0);">
+						<cite></cite>
+					</a>
+				</div>
+				<div class="pop_times_top_g pop_times_top_me">
+					<a class="times_top_g_a times_top_g_a_l" href="javascript:void(0);">
+						<cite></cite>
+					</a>
+					<input type="text" class="times_top_g_input" placeholder="07月" readonly>
+					<label ></label>
+					<a class="times_top_g_a times_top_g_a_r" href="javascript:void(0);">
+						<cite></cite>
+					</a>
+				</div>
+			</div>
+			<div class="pop_times_con">
+				<ul class="pop_times_con_title">
+					<li>日</li>
+					<li>一</li>
+					<li>二</li>
+					<li>三</li>
+					<li>四</li>
+					<li>五</li>
+					<li>六</li>
+				</ul>
+				<ul class="pop_times_con_date">
+				</ul>
+			</div>
+			<div class="pop_times_bottom">
+				<div class="pop_times_bottom_tim">
+					<ul class="tim_ul">
+						<li class="tim_ul_title">时间</li>
+						<li class="tim_ul_li_hr"><input type="text" placeholder="00" readonly>:</li>
+						<li class="tim_ul_li_me"><input type="text" placeholder="00" readonly>:</li>
+						<li class="tim_ul_li_se"><input type="text" placeholder="00" readonly></li>
+					</ul>
+				</div>
+				<div class="pop_times_bottom_btns">
+					<a class="pop_times_bottom_btns_d" href="javascript:void(0);">清空</a>
+					<a class="pop_times_bottom_btns_t" href="javascript:void(0);">今天</a>
+					<a class="pop_times_bottom_btns_c" href="javascript:void(0);">确定</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
