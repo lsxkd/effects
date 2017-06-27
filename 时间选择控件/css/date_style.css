@@ -20,6 +20,12 @@ table{border-collapse:collapse;border-spacing:0;}
 .middle { vertical-align:middle;}
 .hidden{display:none;}
 img { vertical-align:middle;}
+li,input,span,a{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 
 /*
  *弹出框 start * 
@@ -96,19 +102,44 @@ img { vertical-align:middle;}
 
 .pop_times_bottom{position: relative;height: 22px;line-height: 20px;padding: 5px;font-size: 12px;box-sizing:border-box;text-align:center;}
 .pop_times_bottom:after{content:"";display:block;clear:both;}
-.pop_times_bottom_tim{float:left;width:55%;border: 1px solid #B1D2EC;box-sizing:border-box;}
-.pop_times_bottom_tim ul{}
-.pop_times_bottom_tim ul:after{content:"";display:block;clear:both;}
-.pop_times_bottom_tim ul li{float:left;width:25%;box-sizing:border-box;cursor:pointer;height:20px;line-height:20px;}
-.pop_times_bottom_tim ul li input{width:80%;border:0;text-align:center;cursor:pointer;}
-.pop_times_bottom_tim ul li.tim_ul_title{border-right: 1px solid #B1D2EC;box-sizing:border-box;background-color: #ECF4FB;font-size:12px;}
+.pop_times_bottom_tim{float:left;width:55%;border: 1px solid #B1D2EC;box-sizing:border-box;position:relative;}
+.pop_times_bottom_tim ul.tim_ul{}
+.pop_times_bottom_tim ul.tim_ul:after{content:"";display:block;clear:both;}
+.pop_times_bottom_tim ul.tim_ul li{float:left;width:25%;box-sizing:border-box;cursor:pointer;height:20px;line-height:20px;}
+.pop_times_bottom_tim ul.tim_ul li input{width:80%;border:0;text-align:center;cursor:pointer;}
+.pop_times_bottom_tim ul.tim_ul li.tim_ul_title{border-right: 1px solid #B1D2EC;box-sizing:border-box;background-color: #ECF4FB;font-size:12px;}
 
 .pop_times_bottom_btns{float:right;width:40%;border: 1px solid #B1D2EC;box-sizing:border-box;border-left:0;}
 .pop_times_bottom_btns:after{content:"";display:block;clear:both;}
-.pop_times_bottom_btns a{font-size:12px;background-color: #ECF4FB;float: left;height: 20px;line-height:20px;text-align:center;width:33.33%;box-sizing:border-box;border-left: 1px solid #B1D2EC;color: #1F547E;}
+.pop_times_bottom_btns a{font-size:12px;background-color:#DEECF8;float: left;height: 20px;line-height:20px;text-align:center;width:33.33%;box-sizing:border-box;border-left: 1px solid #B1D2EC;color: #1F547E;}
+.pop_times_bottom_btns a:hover{background:#ECF4FB;}
 
 
 
+.timea_pops{position: absolute;left:-1px;bottom:20px;width:100%;height: 125px;border: 1px solid #B1D2EC;box-shadow: 2px 2px 5px rgba(0,0,0,.1);background-color: #fff;display:none;}
+.timea_pops_title{height: 20px;line-height: 20px;text-align: center;border-bottom: 1px solid #B1D2EC;background-color: #ECF4FB;position:relative;}
+.timea_pops_title .closes_hr{position: absolute;top: 0;right: 0px;cursor: pointer;display:inline-block;width:20px;height:100%;font-size:12px;}
+.timea_pops_title .closes_hr:hover{font-size:14px;width: 20px;height:100%;}
+
+.timea_pops_con{width:100%;}
+.timea_pops_con_ul{padding: 5px 0 0 0;}
+.timea_pops_con_ul:after{content:"";display:block;clear:both;}
+.timea_pops_con_ul li{display: block;float: left;width:20%;height: 19px;line-height: 19px;text-align: center;cursor: pointer;}
+.timea_pops_con_ul li:hover{background:#ECF4FB;}
+.timea_pops_con_ul li.on{background:#DEECF8;}
+
+
+.time_six_pop{position: absolute;left:-1px;bottom:20px;width:183%;height:150px;border: 1px solid #B1D2EC;box-shadow: 2px 2px 5px rgba(0,0,0,.1);background-color: #fff;display:none;}
+.time_six_pop_title{height: 20px;line-height: 20px;text-align: center;border-bottom: 1px solid #B1D2EC;background-color: #ECF4FB;position:relative;}
+.time_six_pop_title .closes_mo{position: absolute;top: 0;right: 0px;cursor: pointer;display:inline-block;width:20px;height:100%;font-size:12px;}
+.time_six_pop_title .closes_mo:hover{font-size:14px;width: 20px;height:100%;}
+
+.time_six_pop_con{width:100%;}
+.time_six_pop_con_ul{padding: 5px 0 0 0;}
+.time_six_pop_con_ul:after{content:"";display:block;clear:both;}
+.time_six_pop_con_ul li{display: block;float: left;width:10%;height:20px;line-height:20px;text-align: center;cursor: pointer;}
+.time_six_pop_con_ul li:hover{background:#ECF4FB;}
+.time_six_pop_con_ul li.on{background:#DEECF8;}
 
 
 

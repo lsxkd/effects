@@ -52,11 +52,7 @@ $(function(){
 		$(this).addClass("on")
 
 	})
-	$(document).on("dblclick",".now_year_click",function(){//点击按钮年份减一
-		$(this).html("<input type='text' placeholder='输入年份' vale='' />");
-		$(this).find("input").focus();
-	})
-	$(document).on("click",".yearClicksa",function(){//点击按钮年份减一
+	$(document).on("click",".yearClicksa",function(){//点击按钮弹出年份选择框
 		$(".pop_years").css("display","block");
 		$(".pop_years_lists").html("");
 		var yearcHtml =""
@@ -65,7 +61,7 @@ $(function(){
 		}
 		$(".pop_years_lists").html(yearcHtml);
 	})
-	$(document).on("click",".pop_years_lists li",function(){//点击按钮年份减一
+	$(document).on("click",".pop_years_lists li",function(){//点击选择年份
 		$(".pop_years").css("display","none");
 		$(".pop_years_lists li").removeClass("on");
 		$(this).addClass("on");
@@ -77,7 +73,7 @@ $(function(){
 		rili(yearss,monthss);
 		
 	})
-	$(document).on("click",".yearo_add",function(){//
+	$(document).on("click",".yearo_add",function(){//点击按钮年份累加14年
 		var regs=/[\u4E00-\u9FA5]/g;
 		var yearcHtmlss = ""
 		var yearss=parseInt($(".pop_years_lists").find("li").eq(13).html().replace(regs,''));
@@ -87,7 +83,7 @@ $(function(){
 		}
 		$(".pop_years_lists").html(yearcHtmlss);
 	})
-	$(document).on("click",".yearo_jj",function(){//
+	$(document).on("click",".yearo_jj",function(){//点击按钮年份减14年
 		var regsa=/[\u4E00-\u9FA5]/g;
 		var yearcHtmlss = ""
 		var yearss=parseInt($(".pop_years_lists").find("li").eq(0).html().replace(regsa,''));
@@ -98,10 +94,10 @@ $(function(){
 		$(".pop_years_lists").html(yearcHtmlss);
 	})
 
-	$(document).on("click",".monthClicksa",function(){//点击按钮显示月份
+	$(document).on("click",".monthClicksa",function(){//点击按钮显示月份弹出框
 		$(".pop_months").css("display","block");
 	})
-	$(document).on("click",".pop_months_lists li",function(){//点击按钮显示月份
+	$(document).on("click",".pop_months_lists li",function(){//点击按钮选择月份
 		$(".pop_months").css("display","none");
 		$(".pop_months_lists li").removeClass("on");
 		$(this).addClass("on");
@@ -110,12 +106,6 @@ $(function(){
 		monthss = resultsss;
 		$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
 		$(".pop_times_con_date").html("");
-		rili(yearss,monthss);
-	})
-
-	$(".now_year_click").change(function(){
-		yearss = $(this).find("input").val();
-		$(".content_con").html("");
 		rili(yearss,monthss);
 	})
 
@@ -255,37 +245,6 @@ function timeSelects(){
 
 
 
-
-//打开弹出框方法 start
-function open_pop(id){
-	$(".cover_layer").css("display","block")
-	$("#"+id).css("display","block")
-
-	$("#"+id).css({
-		'left': ($(window).width()-($("#"+id).outerWidth(false)))/2,
-		'top': $(window).height() / 2 - ($("#"+id).outerHeight(false) / 2)
-	})
-}
-//打开弹出框方法 end
-//关闭弹出框方法 start
-function close_pop(id){
-	$(".cover_layer").css("display","none")
-	$("#"+id).css("display","none")
-
-}
-//关闭弹出框方法 start
-
-
-function del_uploads(){ //删除
-	$(this).closest(".goods_item").remove(false);
-}
-
-
-
-
-
-
-//店铺实景/商品  点击添加按钮复制  start
 
 
 
