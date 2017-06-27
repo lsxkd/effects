@@ -77,11 +77,31 @@ $(function(){
 		rili(yearss,monthss);
 		
 	})
+	$(document).on("click",".yearo_add",function(){//
+		var regs=/[\u4E00-\u9FA5]/g;
+		var yearcHtmlss = ""
+		var yearss=parseInt($(".pop_years_lists").find("li").eq(13).html().replace(regs,''));
+		$(".pop_years_lists").html("");
+		for(var i= (yearss+1);i<=(yearss+14);i++){
+			yearcHtmlss += "<li>" + i + "年</li>"
+		}
+		$(".pop_years_lists").html(yearcHtmlss);
+	})
+	$(document).on("click",".yearo_jj",function(){//
+		var regsa=/[\u4E00-\u9FA5]/g;
+		var yearcHtmlss = ""
+		var yearss=parseInt($(".pop_years_lists").find("li").eq(0).html().replace(regsa,''));
+		$(".pop_years_lists").html("");
+		for(var i= (yearss-14);i<=(yearss-1);i++){
+			yearcHtmlss += "<li>" + i + "年</li>"
+		}
+		$(".pop_years_lists").html(yearcHtmlss);
+	})
 
-	$(document).on("click",".monthClicksa",function(){//点击按钮年份减一
+	$(document).on("click",".monthClicksa",function(){//点击按钮显示月份
 		$(".pop_months").css("display","block");
 	})
-	$(document).on("click",".pop_months_lists li",function(){//点击按钮年份减一
+	$(document).on("click",".pop_months_lists li",function(){//点击按钮显示月份
 		$(".pop_months").css("display","none");
 		$(".pop_months_lists li").removeClass("on");
 		$(this).addClass("on");
@@ -91,7 +111,6 @@ $(function(){
 		$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
 		$(".pop_times_con_date").html("");
 		rili(yearss,monthss);
-		
 	})
 
 	$(".now_year_click").change(function(){
