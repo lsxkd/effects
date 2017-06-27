@@ -106,7 +106,7 @@ li,input,span,a{
 .pop_times_bottom_tim ul.tim_ul{}
 .pop_times_bottom_tim ul.tim_ul:after{content:"";display:block;clear:both;}
 .pop_times_bottom_tim ul.tim_ul li{float:left;width:25%;box-sizing:border-box;cursor:pointer;height:20px;line-height:20px;}
-.pop_times_bottom_tim ul.tim_ul li input{width:80%;border:0;text-align:center;cursor:pointer;}
+.pop_times_bottom_tim ul.tim_ul li input{width:80%;border:0;text-align:center;cursor:pointer;color:#1F547E;}
 .pop_times_bottom_tim ul.tim_ul li.tim_ul_title{border-right: 1px solid #B1D2EC;box-sizing:border-box;background-color: #ECF4FB;font-size:12px;}
 
 .pop_times_bottom_btns{float:right;width:40%;border: 1px solid #B1D2EC;box-sizing:border-box;border-left:0;}

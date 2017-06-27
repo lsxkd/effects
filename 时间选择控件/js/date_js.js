@@ -108,6 +108,64 @@ $(function(){
 		$(".pop_times_con_date").html("");
 		rili(yearss,monthss);
 	})
+	$(document).on("click",".tim_ul_li_hr_input",function(){//点击按钮显示小时弹出框
+		$(".timea_pops").css("display","block");
+		selectHours()
+	})
+	$(".timea_pops").on({//点击获取小时的值
+		"click":function(){
+			$(this).addClass("on").siblings().removeClass("on");
+			var hoursVals = $(this).html()
+			hoursVals=hoursVals<10?"0"+hoursVals:hoursVals;
+			$(".tim_ul_li_hr_input").val(hoursVals)
+			$(".timea_pops").css("display","none");
+		}
+	},".timea_pops_con_ul li")
+	$(".closes_hr").on({//点击关闭小时选择框
+		"click":function(){
+			selectHours()
+			$(".timea_pops").css("display","none");
+			
+		}
+	})
+	$(".tim_ul_li_me_input").on({//点击按钮显示分钟弹出框
+		"click":function(){
+			$(".minuties_popas").css("display","block");
+			selectMinutes()
+		}
+	})
+	$(".minuties_popas").on({//点击获取分钟的值
+		"click":function(){
+			$(this).addClass("on").siblings().removeClass("on");
+			var minutesVals = $(this).html()
+			minutesVals=minutesVals<10?"0"+minutesVals:minutesVals;
+			$(".tim_ul_li_me_input").val(minutesVals)
+			$(".time_six_pop").css("display","none");
+		}
+	},".time_six_pop_con_ul li")
+	$(".closes_mo").on({//点击关闭分钟和秒数选择框
+		"click":function(){
+			selectMinutes()
+			$(".time_six_pop").css("display","none");
+			
+		}
+	})
+
+	$(".tim_ul_li_se_input").on({//点击按钮显示秒数弹出框
+		"click":function(){
+			$(".secends_popas").css("display","block");
+			selectMinutes()
+		}
+	})
+	$(".secends_popas").on({//点击获取秒数的值
+		"click":function(){
+			$(this).addClass("on").siblings().removeClass("on");
+			var minutesVals = $(this).html()
+			minutesVals=minutesVals<10?"0"+minutesVals:minutesVals;
+			$(".tim_ul_li_se_input").val(minutesVals)
+			$(".time_six_pop").css("display","none");
+		}
+	},".time_six_pop_con_ul li")
 
 
 })
@@ -243,7 +301,25 @@ function timeSelects(){
 	
 }
 
+function selectHours(){//填充时间选择弹出框
+	var hourfs = ""
+	$(".timea_pops_con_ul").html("")
+	for(var i=0;i<=23;i++){
+		hourfs += "<li>"+i+"</li>"
+	}
 
+	$(".timea_pops_con_ul").html(hourfs)
+
+}
+function selectMinutes(){
+	var minutesfs = ""
+	$(".time_six_pop_con_ul").html("")
+	for(var i=0;i<=59;i++){
+		minutesfs+="<li>"+i+"</li>"
+	}
+	$(".time_six_pop_con_ul").html(minutesfs)
+	
+}
 
 
 
