@@ -7,34 +7,40 @@ $(function(){
 	monthss= oDate.getMonth()+1;//获取月份
 	$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
 	$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
-	$(document).on("click",".title_left_click",function(){//点击按钮月份减一
+	$(document).on("click",".montha_jj",function(){//点击按钮月份减一
 		if(monthss==1){
 			yearss--;
 			monthss=13;
 		}
 		monthss--;
+		$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
+		$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
 		$(".pop_times_con_date").html("");
 		rili(yearss,monthss);
 
 	})
-	$(document).on("click",".title_right_click",function(){//点击按钮月份加一
+	$(document).on("click",".montha_add",function(){//点击按钮月份加一
 		if(monthss==12){
 			yearss++;
 			monthss=0;
 		}
 		monthss++;
+		$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
+		$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
 		$(".pop_times_con_date").html("");
 		rili(yearss,monthss);
 
 	})
-	$(document).on("click",".title_left_l_click",function(){//点击按钮年份减一
+	$(document).on("click",".yeara_jj",function(){//点击按钮年份减一
 		yearss--;
+		$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
 		$(".pop_times_con_date").html("");
 		rili(yearss,monthss);
 
 	})
-	$(document).on("click",".title_right_r_click",function(){//点击按钮年份加一
+	$(document).on("click",".yeara_add",function(){//点击按钮年份加一
 		yearss++;
+		$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
 		$(".pop_times_con_date").html("");
 		rili(yearss,monthss);
 
@@ -50,11 +56,50 @@ $(function(){
 		$(this).html("<input type='text' placeholder='输入年份' vale='' />");
 		$(this).find("input").focus();
 	})
+	$(document).on("click",".yearClicksa",function(){//点击按钮年份减一
+		$(".pop_years").css("display","block");
+		$(".pop_years_lists").html("");
+		var yearcHtml =""
+		for(var i=yearss-7;i<=(yearss+7);i++){
+			yearcHtml += "<li>" + i + "年</li>"
+		}
+		$(".pop_years_lists").html(yearcHtml);
+	})
+	$(document).on("click",".pop_years_lists li",function(){//点击按钮年份减一
+		$(".pop_years").css("display","none");
+		$(".pop_years_lists li").removeClass("on");
+		$(this).addClass("on");
+		var reg=/[\u4E00-\u9FA5]/g;
+		var resultsss=parseInt($(this).html().replace(reg,''));
+		yearss = resultsss;
+		$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
+		$(".pop_times_con_date").html("");
+		rili(yearss,monthss);
+		
+	})
+
+	$(document).on("click",".monthClicksa",function(){//点击按钮年份减一
+		$(".pop_months").css("display","block");
+	})
+	$(document).on("click",".pop_months_lists li",function(){//点击按钮年份减一
+		$(".pop_months").css("display","none");
+		$(".pop_months_lists li").removeClass("on");
+		$(this).addClass("on");
+		var regs=/[\u4E00-\u9FA5]/g;
+		var resultsss=parseInt($(this).html().replace(regs,''));
+		monthss = resultsss;
+		$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
+		$(".pop_times_con_date").html("");
+		rili(yearss,monthss);
+		
+	})
+
 	$(".now_year_click").change(function(){
 		yearss = $(this).find("input").val();
 		$(".content_con").html("");
 		rili(yearss,monthss);
 	})
+
 
 })
 
@@ -106,7 +151,7 @@ function rili(yearss,monthss){
 	}
 	for(var i=prev_months_sum-dddd;i<prev_months_sum;){
 		i++;
-		$(".pop_times_con_date").append("<li class='prev_dayss title_left_click'>"+i+"</li>")
+		$(".pop_times_con_date").append("<li class='prev_dayss montha_jj'>"+i+"</li>")
 	}//153行到159行 显示上个月最后几天
 
 	if(months==4||months==6||months==9||months==11){
@@ -146,12 +191,12 @@ function rili(yearss,monthss){
 	if($(".pop_times_con_date li").length < 35){
 		var summs =7*2 - ($(".pop_times_con_date li").length%7);
 		for(var i = 1;i<=summs;i++){
-			$(".pop_times_con_date").append("<li class='prev_dayss title_right_click'>"+i+"</li>")
+			$(".pop_times_con_date").append("<li class='prev_dayss montha_add'>"+i+"</li>")
 		}//显示下个月份前几天
 	}else if($(".pop_times_con_date li").length >= 35){
 		var summs =7 - ($(".pop_times_con_date li").length%7);
 		for(var i = 1;i<=summs;i++){
-			$(".pop_times_con_date").append("<li class='prev_dayss title_right_click'>"+i+"</li>")
+			$(".pop_times_con_date").append("<li class='prev_dayss montha_add'>"+i+"</li>")
 		}//显示下个月份前几天
 	}
 }
