@@ -5,8 +5,10 @@ $(function(){
 	var oDate = new Date();//获取年月日时分秒
 	yearss = oDate.getFullYear();//获取年份
 	monthss= oDate.getMonth()+1;//获取月份
+	days=oDate.getDate();
 	$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
 	$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
+	$(".pop_times_con_date").attr("value",days);//显示日期
 	$(document).on("click",".montha_jj",function(){//点击按钮月份减一
 		if(monthss==1){
 			yearss--;
@@ -50,6 +52,7 @@ $(function(){
 		if($(this).text() == "") return false;
 		$(".pop_times_con_date li").removeClass("on")
 		$(this).addClass("on")
+		$(".pop_times_con_date").attr("value",$(this).html())
 
 	})
 	$(document).on("click",".yearClicksa",function(){//点击按钮弹出年份选择框
@@ -166,6 +169,17 @@ $(function(){
 			$(".time_six_pop").css("display","none");
 		}
 	},".time_six_pop_con_ul li")
+
+	$(".pop_times_bottom_btns_t").on({
+		"click":function(){
+			todayReset();
+		}
+	})
+	$(".pop_times_bottom_btns_c").on({
+		"click":function(){
+			confirmBtns();
+		}
+	})
 
 
 })
@@ -321,8 +335,44 @@ function selectMinutes(){
 	
 }
 
+function todayReset(){
+	var date = new Date();//获取年月日时分秒
+		y=date.getYear()+1900;//获取年份
+		ys=date.getFullYear();//获取年份
+		ms=date.getMonth()+1;//获取月份
+		d=date.getDate();//获取天数
+		h=date.getHours();//获取小时
+		m=date.getMinutes();//获取分钟
+		s=date.getSeconds();//获取秒钟
+		h=h<10?"0"+h:h;
+		m=m<10?"0"+m:m;
+		s=s<10?"0"+s:s;
+		//document.getElementById("time").innerHTML=ys+"年"+ms+"月"+d+"日"+h+"时"+m+"分"+s+"秒";//显示年月日时分秒
+		yearss = ys;
+		monthss = ms
+		days = d<10?"0"+d:d;
+		$(".yearClicksa").val(yearss+"年");
+		$(".monthClicksa").val(monthss+"月")
+		rili(yearss,monthss);
+		$(".pop_times_con_date").attr("value",days);//显示日期
+		$(".tim_ul_li_hr_input").val(h);
+		$(".tim_ul_li_me_input").val(m);
+		$(".tim_ul_li_se_input").val(s);
 
+}
 
+function confirmBtns(){
+	var nian = $(".yearClicksa").val();
+	var yue = $(".monthClicksa").val();
+	var riqi = $(".pop_times_con_date").attr("value");
+	var xiaoshi = $(".tim_ul_li_hr_input").val();
+	var fen = $(".tim_ul_li_me_input").val();
+	var miao = $(".tim_ul_li_se_input").val();
+
+	var dataAll = nian + yue + riqi + "日 " + xiaoshi +":"+ fen +":"+ miao
+	console.log(dataAll )
+
+}
 
 
 

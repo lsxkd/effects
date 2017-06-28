@@ -96,9 +96,10 @@ li,input,span,a{
 .pop_times_con .pop_times_con_title li{float:left;width:14.28%;text-align:center;height:23px;line-height: 23px;box-sizing:border-box;}
 .pop_times_con .pop_times_con_date{height:120px;}
 .pop_times_con .pop_times_con_date:after{content:"";display:block;clear:both;}
-.pop_times_con .pop_times_con_date li{float:left;width:14.28%;text-align:center;height:20px;line-height: 20px;box-sizing:border-box;cursor: pointer;font-size: 12px;color: #60A2D7;border-left:1px solid #B1D2EC;border-top:1px solid #B1D2EC;}
+.pop_times_con .pop_times_con_date li{float:left;width:14.28%;text-align:center;height:20px;line-height: 20px;box-sizing:border-box;cursor: pointer;font-size: 12px;color:#1F547E;border-left:1px solid #B1D2EC;border-top:1px solid #B1D2EC;}
 .pop_times_con .pop_times_con_date li:hover{background:#ECF4FB;}
 .pop_times_con .pop_times_con_date li.on{background:#DEECF8;}
+.pop_times_con .pop_times_con_date li.prev_dayss{color:#60A2D7;}
 
 .pop_times_bottom{position: relative;height: 22px;line-height: 20px;padding: 5px;font-size: 12px;box-sizing:border-box;text-align:center;}
 .pop_times_bottom:after{content:"";display:block;clear:both;}
