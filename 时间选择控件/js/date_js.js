@@ -175,9 +175,32 @@ $(function(){
 			todayReset();
 		}
 	})
+	$(".pop_times_bottom_btns_d").on({
+		"click":function(){
+			emptyReset();
+		}
+	})
+
 	$(".pop_times_bottom_btns_c").on({
 		"click":function(){
-			confirmBtns();
+			confirmBtns(".timemMarks");
+			$(".timemMarks").removeClass("timemMarks");
+			$(".pop_times").css("display","none")
+		}
+	});
+	$(".time_clicks").on({
+		"click":function(){
+			$(".timemMarks").removeClass("timemMarks");
+			$(this).addClass("timemMarks");
+			var offX = $(this).offset().top + 31;
+			var offY = $(this).offset().left
+			console.log(offX)
+			console.log(offY)
+			$(".pop_times").css({
+				"left":offY,
+				"top":offX,
+				"display":"block"
+			})
 		}
 	})
 
@@ -337,12 +360,12 @@ function selectMinutes(){
 
 function todayReset(){
 	var date = new Date();//获取年月日时分秒
-		y=date.getYear()+1900;//获取年份
-		ys=date.getFullYear();//获取年份
-		ms=date.getMonth()+1;//获取月份
-		d=date.getDate();//获取天数
-		h=date.getHours();//获取小时
-		m=date.getMinutes();//获取分钟
+		y=date.getYear()+1900,//获取年份
+		ys=date.getFullYear(),//获取年份
+		ms=date.getMonth()+1,//获取月份
+		d=date.getDate(),//获取天数
+		h=date.getHours(),//获取小时
+		m=date.getMinutes(),//获取分钟
 		s=date.getSeconds();//获取秒钟
 		h=h<10?"0"+h:h;
 		m=m<10?"0"+m:m;
@@ -360,8 +383,25 @@ function todayReset(){
 		$(".tim_ul_li_se_input").val(s);
 
 }
+function emptyReset(){
+	var date = new Date();//获取年月日时分秒
+		y=date.getYear()+1900,//获取年份
+		ys=date.getFullYear(),//获取年份
+		ms=date.getMonth()+1,//获取月份
+		d=date.getDate();//获取天数
+		yearss = ys;
+		monthss = ms
+		days = d<10?"0"+d:d;
+		$(".yearClicksa").val(yearss+"年");
+		$(".monthClicksa").val(monthss+"月")
+		rili(yearss,monthss);
+		$(".pop_times_con_date").attr("value",days);//显示日期
+		$(".tim_ul_li_hr_input").val("00");
+		$(".tim_ul_li_me_input").val("00");
+		$(".tim_ul_li_se_input").val("00");
+}
 
-function confirmBtns(){
+function confirmBtns(classNames){
 	var nian = $(".yearClicksa").val();
 	var yue = $(".monthClicksa").val();
 	var riqi = $(".pop_times_con_date").attr("value");
@@ -370,6 +410,7 @@ function confirmBtns(){
 	var miao = $(".tim_ul_li_se_input").val();
 
 	var dataAll = nian + yue + riqi + "日 " + xiaoshi +":"+ fen +":"+ miao
+	$(classNames).val(dataAll)
 	console.log(dataAll )
 
 }
