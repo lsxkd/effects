@@ -15,7 +15,7 @@
 		loadInfo()
 	})
 	function loadInfo() {
-	    $.getJSON("2.json", function(data) {
+	    $.getJSON("3.json", function(data) {
 	        $("#info").html("");//清空info内容
 	        $.each(data.comments, function(i, item) {
 	            $("#info").append(
