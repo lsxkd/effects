@@ -5,9 +5,9 @@ $(function(){
 	var oDate = new Date();//获取年月日时分秒
 	yearss = oDate.getFullYear();//获取年份
 	monthss= oDate.getMonth()+1;//获取月份
-	days=oDate.getDate();
-	$(".pop_times_top_ye .times_top_g_input").val(yearss+"年")
-	$(".pop_times_top_me .times_top_g_input").val(monthss+"月")
+	days=oDate.getDate();//获取日期
+	$(".pop_times_top_ye .times_top_g_input").val(yearss+"年") //显示年
+	$(".pop_times_top_me .times_top_g_input").val(monthss+"月")//显示月份
 	$(".pop_times_con_date").attr("value",days);//显示日期
 	$(document).on("click",".montha_jj",function(){//点击按钮月份减一
 		if(monthss==1){
@@ -170,25 +170,25 @@ $(function(){
 		}
 	},".time_six_pop_con_ul li")
 
-	$(".pop_times_bottom_btns_t").on({
+	$(".pop_times_bottom_btns_t").on({//显示今天
 		"click":function(){
 			todayReset();
 		}
 	})
-	$(".pop_times_bottom_btns_d").on({
+	$(".pop_times_bottom_btns_d").on({//清空
 		"click":function(){
 			emptyReset();
 		}
 	})
 
-	$(".pop_times_bottom_btns_c").on({
+	$(".pop_times_bottom_btns_c").on({//确定按钮点击，获取日期并隐藏弹框
 		"click":function(){
 			confirmBtns(".timemMarks");
 			$(".timemMarks").removeClass("timemMarks");
 			$(".pop_times").css("display","none")
 		}
 	});
-	$(".time_clicks").on({
+	$(".time_clicks").on({//点击显示弹框，并获取弹框位置
 		"click":function(){
 			$(".timemMarks").removeClass("timemMarks");
 			$(this).addClass("timemMarks");
@@ -308,37 +308,8 @@ function rili(yearss,monthss){
 
 
 
-//时间选择
-function timeSelects(){
-	var hours = "",
-	minutess = ""
-	$(".pop_times_h").html("")
-	$(".pop_times_m").html("")
-	for(var i=0;i<=23;i++){
-		var houras=i<10?"0"+i:i;
-		hours+="<li>"+houras+"</li>"
-	}
-	$(".pop_times_h").html(hours)
-	for(var i=0;i<=59;i++){
-		var minuteas=i<10?"0"+i:i;
-		minutess+="<li>"+minuteas+"</li>"
-	}
-	$(".pop_times_m").html(minutess)
 
-	$(".pop_times_h li").on({
-		"click":function(){
-			$(this).addClass("on").siblings().removeClass("on");
-		}
-	})
-	$(".pop_times_m li").on({
-		"click":function(){
-			$(this).addClass("on").siblings().removeClass("on");
-		}
-	})
-	
-}
-
-function selectHours(){//填充时间选择弹出框
+function selectHours(){//填充小时选择弹出框
 	var hourfs = ""
 	$(".timea_pops_con_ul").html("")
 	for(var i=0;i<=23;i++){
@@ -348,7 +319,7 @@ function selectHours(){//填充时间选择弹出框
 	$(".timea_pops_con_ul").html(hourfs)
 
 }
-function selectMinutes(){
+function selectMinutes(){//填充分钟和秒数选择弹出框
 	var minutesfs = ""
 	$(".time_six_pop_con_ul").html("")
 	for(var i=0;i<=59;i++){
@@ -401,7 +372,7 @@ function emptyReset(){
 		$(".tim_ul_li_se_input").val("00");
 }
 
-function confirmBtns(classNames){
+function confirmBtns(classNames){//确定按钮方法
 	var nian = $(".yearClicksa").val();
 	var yue = $(".monthClicksa").val();
 	var riqi = $(".pop_times_con_date").attr("value");
