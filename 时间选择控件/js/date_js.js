@@ -411,7 +411,8 @@ function confirmBtns(classNames){
 
 	var dataAll = nian + yue + riqi + "日 " + xiaoshi +":"+ fen +":"+ miao
 	$(classNames).val(dataAll)
-	console.log(dataAll )
+	$(classNames).attr("date-time",dataAll)
+
 
 }
 
