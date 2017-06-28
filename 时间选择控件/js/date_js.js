@@ -192,7 +192,7 @@ $(function(){
 		"click":function(){
 			$(".timemMarks").removeClass("timemMarks");
 			$(this).addClass("timemMarks");
-			var offX = $(this).offset().top + 31;
+			var offX = $(this).offset().top + $(".timemMarks").outerHeight(false) - 1;
 			var offY = $(this).offset().left
 			console.log(offX)
 			console.log(offY)
@@ -202,7 +202,8 @@ $(function(){
 				"display":"block"
 			})
 		}
-	})
+	});
+	
 
 
 })
@@ -386,6 +387,28 @@ function confirmBtns(classNames){//确定按钮方法
 
 
 }
+
+
+function targetClick(e,classNameF,classNameC){//判断点击的是不是弹出框里面，如果不是则关闭弹框
+	var drag = $(classNameF),  //大范围
+		dragel = $(classNameC),	//小范围
+		target = e.target
+		if (dragel !== target && !$.contains(dragel, target)) {
+			console.log(111)
+	        drag.hide();
+	    }
+}
+
+$(function(){
+	$(document).on({
+		"click":function(e){
+			targetClick(e,".pop_times ",".pop_times")
+		}
+	})
+})
+
+
+
 
 
 
