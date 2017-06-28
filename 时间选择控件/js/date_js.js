@@ -389,11 +389,11 @@ function confirmBtns(classNames){//确定按钮方法
 }
 
 
-function targetClick(e,classNameF,classNameC){//判断点击的是不是弹出框里面，如果不是则关闭弹框
+function targetClick(e,classNameF,classNameC,clickBtnb){//判断点击的是不是弹出框里面，如果不是则关闭弹框
 	var drag = $(classNameF),  //大范围
 		dragel = $(classNameC),	//小范围
 		target = e.target
-		if (dragel !== target && !$.contains(dragel, target)) {
+		if (dragel !== target && !$.contains(dragel, target) && !$(target).is($(clickBtnb))) {
 			console.log(111)
 	        drag.hide();
 	    }
@@ -402,7 +402,7 @@ function targetClick(e,classNameF,classNameC){//判断点击的是不是弹出�
 $(function(){
 	$(document).on({
 		"click":function(e){
-			targetClick(e,".pop_times ",".pop_times")
+			//targetClick(e,".pop_times ",".pop_times",".strat_times")
 		}
 	})
 })
