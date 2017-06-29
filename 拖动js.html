@@ -19,27 +19,21 @@
 
 	<script>
 
-		// 拖动DIV end
-			function isMove(obj,object){
-				obj.mousedown(function (event) { 
-					var lefts=object.offset().left;     //获取元素距离文档左边边位置
-					var tops=object.offset().top;		//获取元素距离文档顶部的位置
-					var isMove = true; 					//设置一个布尔值参考值
-					var abs_x = event.pageX;			//获取鼠标离文档左边的位置
-					var abs_y =event.pageY;				//获取鼠标离文档顶部的位置	
-					$(document).mousemove(function (e) {  //鼠标移动事件
-						if (isMove) {					// 若布尔值为真
-							abs_X=abs_x-e.pageX;		//计算鼠标X坐标移动距离
-							abs_Y=abs_y-e.pageY;		//计算鼠标Y坐标移动距离
-							object.css({'left':lefts-abs_X-$(document).scrollLeft() +"px", 'top':tops-abs_Y-$(document).scrollTop()+"px"});   //元素本身位置加上鼠标移动距离
-						} 
-					}).mouseup(function () {     //鼠标松开时
-						isMove = false; 		//布尔值为假；不可拖动；
-					}); 
+		// 拖动DIV
+		function isMove(obj,object){
+			obj.mousedown(function (event) { 
+				var isMove = true; 
+				var abs_x = event.pageX - object.offset().left; 
+				var abs_y = event.pageY - object.offset().top; 
+				$(document).mousemove(function (e) { 
+					if (isMove) {
+						object.css({'left':e.pageX - abs_x, 'top':e.pageY - abs_y,"margin":0}); 
+					} 
+				}).mouseup(function () { 
+					isMove = false; 
 				}); 
-			};
-
-		// 拖动DIV  end
+			}); 
+		};
 		$(function(){
 			isMove($(".wrap_move"),$("#wrap"));		
 		})
