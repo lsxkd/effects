@@ -9,21 +9,10 @@
 	<div id="info">
 		
 	</div>
-	<div id="tb-allproduct"></div>
-	<div id="WG_TabJion"></div>
-	<div id="search_query">
-		<div class="tb-activity">
-			
-		</div>
-		<div class="tb-allproduct"></div>
-	</div>
-	<div id="PageList"></div>
-	<div id="pageBox"></div>
 </body>
 <script>
 	$(function(){
 		loadInfo()
-		createList("1.json")
 	})
 	function loadInfo() {
 	    $.getJSON("3.json", function(data) {
@@ -36,82 +25,33 @@
 	        });
 	        });
 	}
-	//生成所有商品列表信息;
-	function createList(url) {
-		var $p_list = $("#tb-allproduct");
-		$.ajax({
-			url:url,
-			data: arguments[1] || {},
-			dataType:"json",
-			type:"get",
-			success: function(data){
-				if (data.result){
-					$('#WG_TabJion').trigger("click");
-					$('#search_query').val(data.search_query);
-					if(data.datalist.length == 0){ //商品列表为空;
-						$p_list.html('<tr><td style="text-align:center;" colspan="5">商品列表为空</td></tr>');
-						$("#pageBox").hide(); //隐藏分页
-					}else{
-						var datalist = data.datalist , activity='' , actionId=[],html = '';
-						$('.tb-activity tr').each(function() {
-							actionId.push($(this).attr('id'));
-						});
-						for(var i=0; i<datalist.length; i++){
-								activity=''
-								actionId.push(datalist[i].id);
-								html += '<tr id="'+datalist[i].id+'">\
-										<td class="thumbnail"><img class="activity-img" src="'+datalist[i].pic+'" alt="">\
-											<div class="WG-EditPic2"  trigger-id="'+datalist[i].id+'">\
-												<a href="#"><img src="'+datalist[i].pic+'" alt="" id="'+datalist[i].id+'"></a>\
-												<input class="img-input" type="hidden" name="atPic'+datalist[i].id+'" value="'+datalist[i].pic_val+'" id="'+datalist[i].id+'_input">\
-											</div>\
-										</td>\
-										<td class="td-title">\
-											<div class="name"><a href="'+datalist[i].url+'" target="_blank">'+datalist[i].title+'</a>\
-												<input type="hidden" name="content_url" value="'+datalist[i].content_url+'" class="content_url" />\
-											</div>\
-											<div class="">库存：'+datalist[i].stock+'</div>\
-										</td>\
-										<td class="td-price">'+datalist[i].price+'</td>\
-										<td class="td-price"><span class="f-red">'+datalist[i].commission+'</span></td>\
-										<td class="td-price"><span class="f-red">'+datalist[i].type+'</span></td>\
-										<td class="td-price"><span class="f-red">'+datalist[i].price2+'</span></td>\
-										<td class="'+datalist[i].action+'"><a href="javascript:void(0);" class="btn-jion" data-url="">推荐</a></td>\
-									    <td><span class="tip-link"></span></td>\
-										<td class="td-move"><a class="move-up  WG-CatMoveUp" href="#">上移</a> <a class="move-down WG-CatMoveDown" href="#">下移</a></td>\
-									</tr>';
-								
-						}
-						$(".tb-allproduct").html(html);
-						actionId.sort();
-						for(var j=0; j<actionId.length; j++){
-							if(actionId[j]==actionId[j+1]){
-								$('#'+actionId[j]).find('.btn-jion').html('取消推荐');
-							}
-						}
-					} //商品列表非空;
-					
-					if(typeof data.page!="undefined"){
-						$('#PageList').html(data.page);
-							//init();
-					}else{
-						$("#pageBox").hide(); //隐藏分页;
-					}
-					//刷新高度,每次ajax请求,需要根据返回数据内容的多少来刷新当前页面的高度;
-					//dialog.height(0).reset();
-					//dialog.height($(document).height()).reset();
-				}
-				
-				if (!data.result){
-					window.top.decoration.dialogMsg(data.msg);
-				}
-				
-			},
-			error: function(){
-				alert("网络繁忙,请稍后重试");
-			}
-			
-		});
+	function ajax_order(){
+	    $.ajax({
+	        url: "json.json",//ajax请求地址
+	        type: "get",//请求方式 分为get和post
+	        dataType: "json", //要求请求返回数据类型 可分为json html text xml 等
+	        contentType: "application/json; charset=utf-8", //发送服务器数据的编码方式
+
+	        success: function (data) {//执行成功
+	            var dataItem = data.item;
+	            for(var i=0;i<dataItem.length;i++){
+	                console.log(dataItem[i].t_juchuitem_id)
+	            }
+	            console.log(result);
+	            //alert(data.state + data.page + data.min + data.max + data.val);
+	        },
+	        error: function (data) {//执行失败
+	            console.log(14);
+	        },
+	        complete: function (data) { //不管成功还是失败后
+
+	            console.log(15);
+	        }
+	    });
 	}
+	$(function(){
+	    ajax_order()
+	})
+
 </script>
 </html>
