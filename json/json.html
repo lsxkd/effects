@@ -33,7 +33,7 @@
 	        contentType: "application/json; charset=utf-8", //发送服务器数据的编码方式
 
 	        success: function (data) {//执行成功
-	            for(var i=0;i<data.length;i++){
+	            for(var i=0;i<data.content.length;i++){
 	            	console.log(1)
 	                console.log(data[i].content[i].t_juchu_id)
 	            }
