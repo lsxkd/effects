@@ -32,11 +32,9 @@
 	        dataType: "json", //要求请求返回数据类型 可分为json html text xml 等
 	        contentType: "application/json; charset=utf-8", //发送服务器数据的编码方式
 	        success: function (data) {//执行成功
-	        	console.log(data)
-	        	console.log(data.length)
-	        	for(var i =0;i<data.length;i++) { 
+	        	for(var i in data) { 
 			        console.log(i)
-			        if(data[i] == "page_count"){
+			        if(i == "page_count"){
 			        	console.log(data.page_count)
 			        }else{
 			        	console.log(data[i].content.t_juchu_id)
@@ -57,8 +55,8 @@
 			            	console.log("/////")
 			            }
 			            console.log("bbbbbb")
-
 			        }
+			        
 		        }
 	           
 	        },
