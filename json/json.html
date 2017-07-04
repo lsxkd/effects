@@ -36,21 +36,18 @@
 	        	console.log(data[0])
 	        	for(var i in data) { 
 			        console.log(i)
-			        var hh = data[i].item;
-		            console.log(data[i].content.t_juchu_id)
-		            for(var j=0;j<hh.length;j++){
-		            	console.log(hh[j].t_juchuitem_id)
-		            }
+			        if(i == "page_count"){
+
+			        }else{
+			        	var hh = data[i].item;
+			            console.log(data[i].content.t_juchu_id)
+			            for(var j=0;j<hh.length;j++){
+			            	console.log(hh[j].t_juchuitem_id)
+			            }
+			        }
+			        
 		        }
-	            // for(var i=0;i<2;i++){
-	            // 	var hh = data[i].item;
-	            // 	console.log(data[i].content.t_juchu_id)
-	            // 	for(var j=0;j<hh.length;j++){
-	            // 		console.log(hh[j].t_juchuitem_id)
-	            // 	}
-	            // 	//console.log(1)
-	            // }
-	            //console.log(13)
+	           
 	        },
 	        error: function (data) {//执行失败
 	            console.log(14);
