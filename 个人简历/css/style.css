@@ -15,7 +15,7 @@ input:disabled.disabled_color{background:#fff; color:#000000;-webkit-text-fill-c
 div{outline:none;}
 
 .wrap{background:#c0c2cc;padding:5px 0;}
-.main{width:795px;background:#FFF;margin:20px auto;position:relative;padding:20px 0;box-shadow: 0px 0px 30px 5px #7d7d7d;}
+.main{width:795px;background:#FFF;margin:20px auto;position:relative;padding:10px 0;box-shadow: 0px 0px 30px 5px #7d7d7d;}
 .main_box{margin:0px auto;overflow:hidden;width:682px;overflow:hidden;}
 .title{text-align:center;margin:20px auto;overflow:hidden;}
 .title h2{font-size:24px;}
@@ -48,7 +48,7 @@ div{outline:none;}
 .table_project_con p{font-size:12px;line-height:25px;}
 .table_project_con p em{vertical-align:initial;font-weight:bold;}
 
-.side_bar{position:absolute;top:50px;right:-80px;width:42px;height:auto;}
+.side_bar{position:fixed;top:50px;right:-80px;width:42px;height:auto;}
 .side_bar ul{}
 .side_bar ul li{height:42px;width:42px;overflow: hidden;border: 1px solid #669999;background:#FFF;margin-bottom:10px;}
 .side_bar ul li a{display:block;height:40px;line-height:40px;font-size:14px;color:#000;cursor:pointer;text-align:center;}
