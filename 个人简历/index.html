@@ -3,10 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>杜春阳-前端工程师-简历</title>
-	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta content="yes" name="apple-mobile-web-app-capable">
 	<meta content="black" name="apple-mobile-web-app-status-bar-style">
 	<script src="./js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.printarea.js"></script>
 	<link rel="stylesheet" href="./css/style.css">
 	<script>
 		$(function(){
@@ -14,6 +16,15 @@
 				var r_height=$(".table_project_con",$(this)).outerHeight(false)
 				$(".table_project_title",$(this)).css("height",r_height)
 			})
+			$(".side_bar ul li a").mouseover(function(){
+				$(this).html($(this).attr("data-name"))
+			})
+			$(".side_bar ul li a").mouseout(function(){
+				$(this).html("")
+			})
+			$(".print").click(function(){
+				$(".main_box").printArea();
+			});
 		})
 	</script>
 </head>
@@ -299,6 +310,16 @@
 							</tbody>
 						</table>
 					</div>
+				</div>
+				<div class="side_bar">
+					<ul>
+						<li>
+							<a class="download" href="./images/杜春阳简历.doc" data-name="下载"></a>
+						</li>
+						<li>
+							<a class="print" href="javascript:void(0)" data-name="打印"></a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</main>
