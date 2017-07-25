@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>排序</title>
+	<script src="http://duchunyang.com/js/jquery-2.1.1.js"></script>
+</head>
+<body>
+<div class="box">
+	
+	<p>排序前：<span class="before"></span></p>
+
+	<h3>1、冒泡排序</h3>
+	<p>排序后：<span class="after"></span></p>
+
+	<h3>2、快速排序</h3>
+	<p>排序后：<span class="ks_after"></span></p>
+</div>
+	<script>
+	var array = [3,6,2,4,8,9,56,87,42,1,45,36,6,89,53]	
+	var times = 0
+	$(function(){
+		$(".before").html(array.join(","))		
+		mp_name()//冒泡排序
+		$(".ks_after").html(ks_name(array).join(",") + "<br/><br/>循环次数:"+ x)//快速排序
+
+	})
+	function mp_name(){  //冒泡排序
+		for(var i=0;i<array.length-1;i++){
+			for(var j=i+1;j<array.length;j++){
+				if(array[i] > array[j]){
+					var a = array[i];
+					array[i] = array[j];
+					array[j] = a;
+				}
+				times++
+			}
+		}
+		$(".after").html(array.join(",") + "<br/><br/>循环次数:"+times)
+	}
+
+	var timesa = 0;
+	var x = 0;
+	function ks_name(array){//快速排序
+		//如果数组长度小于等于1无需判断直接返回即可
+		if(array.length<=1){
+			return array
+		}
+		var harfIndex = Math.floor(array.length/2);//取基准点  
+		var harfVal = array.splice(harfIndex,1);//取基准点的值,splice(index,1)函数可以返回数组中被删除的那个数array[index+1]  
+		var arrLeft = [];//存放比基准点小的数组  
+		var arrRight=[];//存放比基准点大的数组  
+		for(var i=0;i<array.length;i++){
+			if(array[i]<harfVal){
+				arrLeft.push(array[i]);//比基准点小的放在左边数组  
+			}else{
+				arrRight.push(array[i]);//比基准点大的放在右边数组  
+			}
+			timesa++;
+			//console.log("第"+(++timesa)+"次排序后："+array);  
+			x = timesa
+		}
+		//递归执行以上操作,对左右两个数组进行操作，直到数组长度为<=1；  
+		return ks_name(arrLeft).concat(harfVal,ks_name(arrRight));
+		
+	}
+	
+	
+
+	</script>
+</body>
+</html>
