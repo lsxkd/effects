@@ -6,40 +6,118 @@
 </head>
 <body>
 	
-	<p>数组：[1,1,2,2,3,4,5,6,6]</p>
+	<p>数组：[6,8,15,1,1,2,2,3,4,5,6,6]</p>
 
 
-	<p>方法一：</p>
+	<h2>方法一：效率比较高的方法</h2>
+	<p>思路：</p>
+	<p>1.先将原数组进行排序</p>
+	<p>2.检查原数组中的第i个元素 与 结果数组中的最后一个元素是否相同，因为已经排序，所以重复元素会在相邻位置</p>
+	<p>3.如果不相同，则将该元素存入结果数组中</p>
 	<p id="one"></p>
+	<p>说明：这种方法也会有一定的局限性，因为在去重前进行了排序，所以最后返回的去重结果也是排序后的。如果要求不改变数组的顺序去重，那这种方法便不可取了。</p>
+	<p>代码：</p>
+	<textarea name="" id="" cols="100" rows="25" disabled="disabled">
+		//******方法一******
+	
+		function sortNumber(a,b){
+			return a - b
+		}
+		function array1(arr){
+			arr.sort(sortNumber);
+			console.log(arr+"ppppp")
+			var res = [arr[0]];
+			for(var i=1;i < arr.length;i++){
+				if(arr[i] !== res[res.length-1]){
+					res.push(arr[i]);
+				}
+			}
+			return res;
+		}
+		console.log("方法一")
+		console.log(array1(box))
+		document.getElementById("one").innerHTML = array1(box)
+	</textarea>
 	<br><br><br>
 
-	<p>方法二：</p>
+
+	<h2>方法二：是比较常规的方法</h2>
+	<p>思路：</p>
+	<p>1.构建一个新的数组存放结果</p>
+	<p>2.for循环中每次从原数组中取出一个元素，用这个元素循环与结果数组对比</p>
+	<p>3.若结果数组中没有该元素，则存到结果数组中</p>
 	<p id="two"></p>
+	<p>代码：</p>
+	<textarea name="" id="" cols="100" rows="25" disabled="disabled">
+		//******方法二******
+
+		function array2(arr2){
+			var res2 = [arr2[0]];
+			for(var i = 1;i < arr2.length;i++){
+				var repeat = false;
+				for(var j = 0;j < res2.length;j++){
+					if(arr2[i] == res2[j]){
+						repeat = true;
+						break;
+					}
+				}
+				if(!repeat){
+					res2.push(arr2[i]);
+				}
+			}
+			return res2;
+
+		}
+		console.log("方法二")
+		console.log(array2(box2))
+		document.getElementById("two").innerHTML = array2(box2)
+	</textarea>
 	<br><br><br>
-	<p>方法三：</p>
+
+
+
+
+	<h2>方法三：推荐使用</h2>
+	<p>思路：</p>
+	<p>1.创建一个新的数组存放结果</p>
+	<p>2.创建一个空对象</p>
+	<p>3.for循环时，每次取出一个元素与对象进行对比，如果这个元素不重复，则把它存放到结果数组中，同时把这个元素的内容作为对象的一个属性，并赋值为1，存入到第2步建立的对象中。</p>
 	<p id="three"></p>
+	<p>说明：至于如何对比，就是每次从原数组中取出一个元素，然后到对象中去访问这个属性，如果能访问到值，则说明重复。</p>
+	<p>代码：</p>
+	<textarea name="" id="" cols="100" rows="25" disabled="disabled">
+		//******方法三******
+		function array3(arr3){
+			var res3 = [];
+			var jsons = {};
+			for(var i = 0;i < arr3.length;i++){
+				if(!jsons[arr3[i]]){
+					res3.push(arr3[i]);
+					jsons[arr3[i]] = 1;
+				}
+			}
+			return res3;
+		}
+
+		console.log("方法三");
+		console.log(array3(box2))
+		document.getElementById("three").innerHTML = array3(box2)
+	</textarea>
 	<script>
 
-		var box = [1,1,2,2,3,4,5,6,6]
+		var box = [6,8,15,1,1,2,2,3,4,5,6,6]
+		var box1 = [6,8,15,1,1,2,2,3,4,5,6,6]
+		var box2 = [6,8,15,1,1,2,2,3,4,5,6,6]
 
 
 		//******方法一******
-		
-
-
-		// Array.prototype.arrays = function(){
-		// 	this.sort();
-		// 	var res = [this[0]];
-		// 	for(var i=1;i<this.length;i++){
-		// 		if(this[i] !== res[res.length-1]){
-		// 			res.push(this[i]);
-		// 		}
-		// 	}
-		// 	return res;
-		// }
-
+	
+		function sortNumber(a,b){
+			return a - b
+		}
 		function array1(arr){
-			arr.sort();
+			arr.sort(sortNumber);
+			console.log(arr+"ppppp")
 			var res = [arr[0]];
 			for(var i=1;i<arr.length;i++){
 				if(arr[i] !== res[res.length-1]){
@@ -75,8 +153,8 @@
 
 		}
 		console.log("方法二")
-		console.log(array2(box))
-		document.getElementById("two").innerHTML = array1(box)
+		console.log(array2(box2))
+		document.getElementById("two").innerHTML = array2(box2)
 
 
 
@@ -95,8 +173,8 @@
 		}
 
 		console.log("方法三");
-		console.log(array3(box))
-		document.getElementById("three").innerHTML = array1(box)
+		console.log(array3(box2))
+		document.getElementById("three").innerHTML = array3(box2)
 
 
 
