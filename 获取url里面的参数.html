@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取url参数</title>
+</head>
+<body>
+	
+</body>
+<script>
+	userNameUrl=GetQueryString("userName"); 
+	//URL截取参数封装：*/
+    function GetQueryString(str){
+        var rs=new RegExp("(^|)"+str+"=([^&]*)(&|$)","gi").exec(LocString),tmp;
+        if(tmp=rs){
+            return tmp[2];
+        }else{
+            return null;
+        }
+    }
+</script>
+</html>
