@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网易云音乐轮播图</title>
+
+	<style>
+		*{padding: 0;margin: 0;}
+		table,tbody,thead,tfoot,tr,td,ul,ol,li,a,img,b,h1,h2,h3,h4,h5,h6,em,i,b,span,div,p{font-style:normal;vertical-align:middle;font-weight:normal;border-collapse: collapse;border:0;text-decoration: none;list-style-type:none;}
+		.bannerCon{width:1200px;height:330px;margin:0 auto;margin-top:50px;overflow:hidden;}
+		.bannerCon ul{position:relative;width:1200px;height:300px;text-align:center;overflow:hidden;}
+		.bannerCon ul li{position:absolute;top:0;height:300px;width:800px;transition:all 2;}
+		.bannerCon ul li img{max-width:100%;max-height:100%;}
+		
+		.bannerNavs{height:30px;width:1200px;text-align:center;}
+		.bannerNavs a{display:inline-block;width:35px;height:4px;background:#ccc;}
+		.bannerNavs a.active{background:blue;}
+
+		.lilist01{transform:scale(0.81) ;left:0;z-index:2;transform-origin:0 100%;}
+		.lilist02{left:200px;z-index:3;}
+		.lilist03{transform:scale(0.81);left:650px;z-index:2;transform-origin:100% 100%;}
+		.lilist04{transform:scale(0.81);left:850px;z-index:1;transform-origin:100% 100%;}
+		.lilist05{transform:scale(0.81);left:1050px;z-index:1;transform-origin:100% 100%;}
+		.lilist06{transform:scale(0.81);left:1250px;z-index:1;transform-origin:100% 100%;}
+
+	</style>
+</head>
+<body>
+	<div class="bannerCon">
+		<ul class="ulList">
+			<li class="lilist01">
+				<a href="javascript:;" >
+					<img src="images/banner01.jpg" alt="">
+				</a>
+			</li>
+			<li class="lilist02" >
+				<a href="javascript:;" >
+					<img src="images/banner02.jpg" alt="">
+				</a>
+			</li>
+			<li class="lilist03" >
+				<a href="javascript:;" >
+					<img src="images/banner03.jpg" alt="">
+				</a>
+			</li>
+			<li class="lilist04">
+				<a href="javascript:;" >
+					<img src="images/banner04.jpg" alt="">
+				</a>
+			</li>
+			<li class="lilist05">
+				<a href="javascript:;" >
+					<img src="images/banner05.jpg" alt="">
+				</a>
+			</li>
+			<li class="lilist06">
+				<a href="javascript:;" >
+					<img src="images/banner06.jpg" alt="">
+				</a>
+			</li>
+		</ul>
+		<div class="bannerNavs">
+			<a href="javascript:;" class=""></a>
+			<a href="javascript:;" class=""></a>
+			<a href="javascript:;" class=""></a>
+			<a href="javascript:;" class=""></a>
+			<a href="javascript:;" class=""></a>
+			<a href="javascript:;" class=""></a>
+		</div>
+	</div>
+</body>
+<script>
+	
+	var liList = document.getElementsByClassName("ulList")[0].getElementsByTagName("li"),
+		navList = document.getElementsByClassName("bannerNavs")[0].getElementsByTagName("a")
+		index = 0,
+		listArray = ["lilist01","lilist02","lilist03","lilist04","lilist05","lilist06"],
+		item1=document.getElementsByClassName("lilist03")[0].getElementsByTagName("img")[0],
+		item2=document.getElementsByClassName("lilist01")[0].getElementsByTagName("img")[0]
+		navList[index].style.background="blue"
+		
+
+	function setColors(){//设置颜色
+		for(var i in liList){
+			if(i-0+1){
+				navList[i].style.background="#ccc"
+			}
+		}
+		navList[index].style.background="blue"
+	}
+	function nextList(){//向下翻
+		listArray.unshift(listArray.pop());
+		for(var j=0;j<liList.length;j++){
+			liList[j].setAttribute("class",listArray[j])
+		}
+		index++;
+		if(index>5){
+			index = 0
+		}
+		setColors()
+		item1 = document.getElementsByClassName("lilist03")[0].getElementsByTagName("img")[0];
+		item2 = document.getElementsByClassName("lilist01")[0].getElementsByTagName("img")[0];
+		
+	}
+
+	function preList(){//向上翻
+		listArray.push(listArray.shift());
+		for(var j=0;j<liList.length;j++){
+			liList[j].setAttribute("class",listArray[j])
+		}
+		index--;
+		if(index<0){
+			index = 5
+		}
+		setColors()
+		item1 = document.getElementsByClassName("lilist03")[0].getElementsByTagName("img")[0];
+		item2 = document.getElementsByClassName("lilist01")[0].getElementsByTagName("img")[0];
+		
+	}
+
+	window.onload=function(){
+		document.addEventListener("click",function(event){
+			var target = event.target;
+			if(target == item1){
+				nextList();
+			}else if(target == item2){
+				preList();
+			}
+		})
+	}
+	
+
+	
+</script>
+
+</html>
