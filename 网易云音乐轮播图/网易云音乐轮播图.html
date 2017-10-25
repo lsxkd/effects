@@ -119,6 +119,7 @@
 	}
 
 	window.onload=function(){
+		var hovers = document.getElementsByClassName("bannerCon")[0]
 		document.addEventListener("click",function(event){
 			var target = event.target;
 			if(target == item1){
@@ -126,6 +127,16 @@
 			}else if(target == item2){
 				preList();
 			}
+		})
+		var timers = setInterval("nextList()",2000);
+		hovers.addEventListener("mouseover",function(event){
+			//var target = event.target;
+			clearInterval(timers);
+		})
+
+		hovers.addEventListener("mouseout",function(event){
+			//var target = event.target;
+			timers = setInterval("nextList()",2000);
 		})
 	}
 	
