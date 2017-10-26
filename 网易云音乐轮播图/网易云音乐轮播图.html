@@ -80,7 +80,7 @@
 		navList[index].style.background="blue"
 		
 
-	function setColors(){//设置颜色
+	function setColors(){//设置选中颜色
 		for(var i in liList){
 			if(i-0+1){
 				navList[i].style.background="#ccc"
@@ -129,13 +129,14 @@
 			}
 		})
 		var timers = setInterval("nextList()",2000);
-		hovers.addEventListener("mouseover",function(event){
+		hovers.addEventListener("mouseover",function(event){ //移入时移除定时器
 			//var target = event.target;
 			clearInterval(timers);
 		})
 
-		hovers.addEventListener("mouseout",function(event){
+		hovers.addEventListener("mouseout",function(event){//移出时添加定时器
 			//var target = event.target;
+			clearInterval(timers);
 			timers = setInterval("nextList()",2000);
 		})
 	}
