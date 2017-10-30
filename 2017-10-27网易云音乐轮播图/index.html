@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片轮播</title>
+
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.carousel{
+			width:1200px;
+			height:366px;
+			/*background:#ff0000;*/
+			margin:80px auto;
+		}
+		li{
+			position:absolute;
+			list-style:none;
+			width:730px;
+			height:336px;
+			transition:all 0.5s;
+		}
+		.imglist{
+			width:1200px;
+			height:336px;
+			/*background:#6600ff;*/
+		}
+		.imglist ul{
+			width:100%;
+			height:336px;
+			position:relative;
+			overflow:hidden;
+		}
+		.line{
+			width:1200px;
+			height:30px;
+			text-align:center;
+			/*background:#00ff00;*/
+		}
+
+		.list1{
+			transform:translate(0px,0px) scale(0.81);
+			transform-origin:0 100%;
+			z-index:2;
+		}
+		.list2{
+			transform:translate(235px,0px);
+			z-index:3;
+		}
+		.list3{
+			transform:translate(730px,0px) scale(0.81);
+			transform-origin:100% 100%;
+			z-index:2;
+		}
+		.list4{
+			transform:translate(965px,0px) scale(0.81);
+			transform-origin:100% 100%;
+			z-index:1;
+		}
+		.list5{
+			transform:translate(1200px,0px) scale(0.81);
+			transform-origin:100% 100%;
+		}
+		.list6{
+			transform:translate(1435px,0px) scale(0.81);
+			transform-origin:100% 100%;
+		}
+		.line a{
+			display:inline-block;
+			width:35px;
+			height:3px;
+			background:#ccc;
+		}
+	</style>
+</head>
+<body>
+	<div class="carousel">
+		<div class="imglist">
+			<ul>
+				<li class="list1"><a href="javascript:;"><img src="images/01.jpg" alt=""></a></li>
+				<li class="list2"><a href="javascript:;"><img src="images/02.jpg" alt=""></a></li>
+				<li class="list3"><a href="javascript:;"><img src="images/03.jpg" alt=""></a></li>
+				<li class="list4"><a href="javascript:;"><img src="images/04.jpg" alt=""></a></li>
+				<li class="list5"><a href="javascript:;"><img src="images/05.jpg" alt=""></a></li>
+				<li class="list6"><a href="javascript:;"><img src="images/06.jpg" alt=""></a></li>
+			</ul>
+		</div>
+		<div class="line">
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+		</div>
+	</div>
+	<script>
+		//设置线型按钮图标的颜色
+		//获取线型按钮
+		var lineBtn = document.getElementsByClassName("line")[0].getElementsByTagName("a"),
+			index = 0,
+			imgArray = ["list1","list2","list3","list4","list5","list6"];
+			liList = document.getElementsByClassName("imglist")[0].getElementsByTagName("li"),
+			boxL = document.getElementsByClassName("carousel")[0];
+		//定义线型按钮的显示颜色
+		function lineColor(){
+			for(var i in lineBtn){
+				//console.log(i);
+				if(i-0+1) { // 判断下标是不是数字
+					lineBtn[i].style.background="#ccc";
+				}
+				lineBtn[index].style.background="#45c17c"
+			}
+		}
+		lineColor();
+
+		//定义向下翻页按钮
+		function nextPic(){
+			imgArray.unshift(imgArray[5]);//将最后一个元素复制添加到第一个
+			imgArray.pop();//删除最后一个元素
+			for(var i in liList){
+				if(i-0+1){
+					liList[i].setAttribute("class",imgArray[i]);
+				}
+			}
+			index++;
+			if(index>5){
+				index=0;
+			}
+			lineColor();
+		}
+		//定义向上翻页按钮
+		function prePic(){
+			imgArray.push(imgArray[0]);//将第一个元素复制添加到最后一个
+			imgArray.shift();//删除第一个元素
+			for(var i in liList){
+				if(i-0+1){
+					liList[i].setAttribute("class",imgArray[i]);
+				}
+			}
+			index--;
+			if(index<0){
+				index=5;
+			}
+			lineColor();
+		}
+		//绑定事件
+		boxL.addEventListener("click",function(){
+			//console.log(event.target.parentNode.parentNode)
+			var els = event.target.parentNode.parentNode
+			if(els.getAttribute("class")=="list3"){
+				nextPic();
+			}else if(els.getAttribute("class")=="list1"){
+				prePic();
+			}
+		})
+		
+		timer = setInterval(nextPic,2000);//每隔两秒钟往下翻页一次
+
+		//鼠标移入清除定时器
+		document.getElementsByClassName("carousel")[0].onmouseover=function(){
+			clearInterval(timer);
+		}
+
+		//鼠标移出添加定时器
+		document.getElementsByClassName("carousel")[0].onmouseout=function(){
+			timer = setInterval(nextPic,2000);//每隔两秒钟往下翻页一次
+		}
+	</script>
+</body>
+</html>
