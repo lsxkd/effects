@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简历特效</title>
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/vue@2.4.2.js"></script>
+
+	
+</head>
+
+<body  spellcheck="false">
+<div id="style_box" style="display:none">
+html, body {
+  margin-top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+pre {
+  overflow: auto;
+  max-height: 90%;
+  width: 100%;
+  border-radius: 1px; /* Prevents bad clipping in Chrome */
+}
+
+#content {
+  position: absolute;
+  top: 0; right: 0; left: 0; bottom: 20px;
+}
+
+#header {
+  position: absolute;
+  bottom: 0;
+  height: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 10px;
+}
+
+a:after {
+  content: '';
+  padding-right: 5px;
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-color: inherit;
+}
+
+a:last-of-type:after {
+  border: none;
+}
+
+* {
+  -webkit-transition: all 1s;
+}
+
+html {
+  background: rgb(63, 82, 99);
+}
+
+pre, a {
+  color: white;
+}
+
+pre:not(:empty) {
+  overflow: auto;
+  background: rgb(48, 48, 48);
+  border: 1px solid #ccc;
+  max-height:94.6%;
+  width: 49%;
+  font-size: 14px;
+  font-family: monospace;
+  padding: 10px 10px 20px;
+  box-shadow: -4px 4px 2px 0 rgba(0,0,0,0.3);
+  white-space: pre-wrap;
+  outline: 0;
+}
+#pgp-text {
+  overflow: auto;
+  background: rgb(48, 48, 48);
+  border: 1px solid #ccc;
+  max-height:94.6%;
+  width: 49%;
+  font-size: 14px;
+  font-family: monospace;
+  padding: 10px 10px 20px;
+  box-shadow: -4px 4px 2px 0 rgba(0,0,0,0.3);
+  white-space: pre-wrap;
+  outline: 0;
+      -webkit-transform: rotateY(10deg);
+    -webkit-transform-origin: left;
+}
+
+#style-text {
+  -webkit-transform: translateX(95%);
+  position: absolute;
+}
+
+.comment       { color: #857F6B; font-style: italic; }
+.selector      { color: #E69F0F; }
+.selector .key { color: #64D5EA; }
+.key           { color: #64D5EA; }
+.value         { color: #BE84F2; }
+.value.px      { color: #F92772; }
+
+body {
+  -webkit-perspective: 1000px;
+}
+
+#style-text {
+  -webkit-transform: translateX(98.5%) rotateY(-10deg);
+  -webkit-transform-origin: right;
+  max-height: 94.5%;
+}
+
+pre:not(#style-text) {
+  -webkit-transform: rotateY(10deg);
+  -webkit-transform-origin: left;
+}
+
+#work-text.flipped {
+  -webkit-transform: rotateX(0deg) rotateY(190deg) rotateZ(180deg);
+}
+
+#work-text .md {
+  -webkit-transform: rotateY(190deg) rotateZ(180deg);
+  margin-top: 800px;
+}
+
+.md {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6 {
+  display: inline-block;
+  color: #ddd;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.md li {
+  margin: 5px 0;
+}
+
+.md h1, .md h2, .md h3, .md h4, .md h5, .md h6, .md ul, .md p {
+  margin: 0px;
+}
+
+#pgp-text {
+  font-size: 12px;
+  color: #ada;
+}
+
+pre:hover{
+box-shadow: 0px 0px 40px 5px rgba(255,255,255,0.4);
+}
+
+#skip-animation, #pause-resume {
+display: none;
+}
+
+.value {
+  text-shadow: 0px 15px 1px white;
+}
+</div>
+
+
+<div id="style_show_box" style="display:none;">
+	<span class="comment">/**
+ * 嗨，大家好！我是蓝色星空岛！
+ */</span>
+<span class="selector">* </span>{<span class="key">
+  -webkit-transition</span>:<span class="value"> all 1s</span>;
+}
+<span class="selector">html </span>{<span class="key">
+  background</span>:<span class="value"> rgb(63, 82, 99)</span>;
+}
+<span class="selector">pre, a </span>{<span class="key">
+  color</span>:<span class="value"> white</span>;
+}
+<span class="key">
+<span class="selector">pre</span>:not(<span class="key"></span>:empty) </span>{<span class="key">
+  overflow</span>:<span class="value"> auto</span>;<span class="key">
+  background</span>:<span class="value"> rgb(48, 48, 48)</span>;<span class="key">
+  border</span>:<span class="value"> 1<span class="value px">px</span> solid #ccc</span>;<span class="key">
+  max-height</span>:<span class="value"> 44.6%</span>;<span class="key">
+  width</span>:<span class="value"> 49%</span>;<span class="key">
+  font-size</span>:<span class="value"> 14<span class="value px">px</span></span>;<span class="key">
+  font-family</span>:<span class="value"> monospace</span>;<span class="key">
+  padding</span>:<span class="value"> 10<span class="value px">px</span> 10<span class="value px">px</span> 20<span class="value px">px</span></span>;<span class="key">
+  box-shadow</span>:<span class="value"> -4<span class="value px">px</span> 4<span class="value px">px</span> 2<span class="value px">px</span> 0 rgba(0,0,0,0.3)</span>;<span class="key">
+  white-space</span>:<span class="value"> pre-wrap</span>;<span class="key">
+  outline</span>:<span class="value"> 0</span>;
+}
+<span class="selector">#style-text </span>{<span class="key">
+  -webkit-transform</span>:<span class="value"> translateX(95%)</span>;<span class="key">
+  position</span>:<span class="value"> absolute</span>;
+}
+<span class="selector">.comment       </span>{<span class="key"> color</span>:<span class="value"> #857F6B</span>;<span class="key"> font-style</span>:<span class="value"> italic</span>; }
+<span class="selector">.selector      </span>{<span class="key"> color</span>:<span class="value"> #E69F0F</span>; }
+<span class="selector">.selector .key </span>{<span class="key"> color</span>:<span class="value"> #64D5EA</span>; }
+<span class="selector">.key           </span>{<span class="key"> color</span>:<span class="value"> #64D5EA</span>; }
+<span class="selector">.value         </span>{<span class="key"> color</span>:<span class="value"> #BE84F2</span>; }
+<span class="selector">.value.px      </span>{<span class="key"> color</span>:<span class="value"> #F92772</span>; }
+<span class="selector">body </span>{<span class="key">
+  -webkit-perspective</span>:<span class="value"> 1000<span class="value px">px</span></span>;
+}
+<span class="selector">#style-text </span>{<span class="key">
+  -webkit-transform</span>:<span class="value"> translateX(98.5%) rotateY(-10deg)</span>;<span class="key">
+  -webkit-transform-origin</span>:<span class="value"> right</span>;<span class="key">
+  max-height</span>:<span class="value"> 94.5%</span>;
+}
+<span class="key">
+<span class="selector">pre</span>:not(#style-text) </span>{<span class="key">
+  -webkit-transform</span>:<span class="value"> rotateY(10deg)</span>;<span class="key">
+  -webkit-transform-origin</span>:<span class="value"> left</span>;
+}
+<span class="selector">#work-text.flipped </span>{<span class="key">
+  -webkit-transform</span>:<span class="value"> rotateX(0deg) rotateY(190deg) rotateZ(180deg)</span>;
+}
+<span class="selector">#work-text .md </span>{<span class="key">
+  -webkit-transform</span>:<span class="value"> rotateY(190deg) rotateZ(180deg)</span>;<span class="key">
+  margin-top</span>:<span class="value"> 800<span class="value px">px</span></span>;
+}
+<span class="selector">.md </span>{<span class="key">
+  font-family</span>:<span class="value"> "Helvetica Neue", Helvetica, sans-serif</span>;
+}
+<span class="selector">.md h1, .md h2, .md h3, .md h4, .md h5, .md h6 </span>{<span class="key">
+  display</span>:<span class="value"> inline-block</span>;<span class="key">
+  color</span>:<span class="value"> #ddd</span>;<span class="key">
+  border-bottom</span>:<span class="value"> 1<span class="value px">px</span> solid #ccc</span>;<span class="key">
+  padding-bottom</span>:<span class="value"> 5<span class="value px">px</span></span>;
+}
+<span class="selector">.md li </span>{<span class="key">
+  margin</span>:<span class="value"> 5<span class="value px">px</span> 0</span>;
+}
+<span class="selector">.md h1, .md h2, .md h3, .md h4, .md h5, .md h6, .md ul, .md p </span>{<span class="key">
+  margin</span>:<span class="value"> 0<span class="value px">px</span></span>;
+}
+<span class="selector">#pgp-text </span>{<span class="key">
+  font-size</span>:<span class="value"> 12<span class="value px">px</span></span>;<span class="key">
+  color</span>:<span class="value"> #ada</span>;
+}
+<span class="key">
+<span class="selector"> pre</span>:hover</span>{<span class="key">
+   box-shadow</span>:<span class="value"> 0<span class="value px">px</span> 0<span class="value px">px</span> 40<span class="value px">px</span> 5<span class="value px">px</span> rgba(255,255,255,0.4)</span>;
+}
+<span class="selector"> #skip-animation, #pause-resume </span>{<span class="key">
+   display</span>:<span class="value"> none</span>;
+ }
+<span class="selector">.value </span>{<span class="key">
+  text-shadow</span>:<span class="value"> 0<span class="value px">px</span> 15<span class="value px">px</span> 1<span class="value px">px</span> white</span>;
+}
+</div>
+	 <div id="content" ref="container">
+    <pre contenteditable="true" id="style-text">
+    	<div id="height_id" v-html="divCode"></div>
+    </pre>
+      
+	<pre id="pgp-text">
+		<div id="height_id02">{{code}}</div>
+		<div v-html="styleCode">
+
+    	</div>
+	</pre>
+	<pre id="work-text" class="flipped"></pre>
+	
+    </div>
+</body>
+<script>
+	$(function(){
+		var htmls01 = $("#style_box").html();
+		var htmls02 = $("#style_show_box").html();
+		var t = setInterval(function(){
+			//goButtom()
+		},500)
+		//var htmls01 = "你好";
+		var app = new Vue({
+		  el: '#content',
+		  components: {
+
+		  },
+		  data(){
+		    return {
+		      code:'',
+		      codeTwo:'',
+		      finalCode:htmls01,
+		      finalCode2:htmls02
+		    }
+		  },
+		  created(){
+        var ss = 0;
+		    var n = 0
+		    var temers = setInterval(() => {
+		      this.code = this.finalCode.substring(0,n)
+		      this.codeTwo = this.finalCode2.substring(0,n)
+		      n += 1
+          goButtom()
+          if(htmls02.length>=htmls01.length){
+            ss = htmls02.length
+          }else{
+            ss = htmls01.length
+          }
+          if(n<=ss){
+            
+          }else{
+            clearInterval(temers);
+          }
+          
+		    },10)
+		  },
+		  computed:{
+		    styleCode(){
+		      return '<style>' + this.code + '</style>'
+		    },
+		    divCode(){
+		    	return this.codeTwo
+		    }
+		  }
+		})
+
+	})
+	function goButtom(){
+		$("#style-text").scrollTop(100000);
+		$("#pgp-text").scrollTop(100000);
+		console.log(1111)
+	}
+</script>
+</html>
