@@ -20,7 +20,7 @@
 		height:100%;
 		position:relative;
 	}
-	#wrap img{position:absolute;left:0;top:0;z-index:1;display:none;}
+	#wrap img{position:absolute;left:0;top:0;z-index:1;display:none;max-width:100%;max-height:100%;}
 	#wrap img.active{display:block;}
 
  </style>
@@ -29,34 +29,34 @@
 		<div id="wrap"></div>
 	</div>
 	<script>
-		var str="";
-		var zIndex = 0;
-		var oWrap=document.getElementById("wrap");
-		var imgList = oWrap.getElementsByTagName("img")
-		for(var i=0;i<=74;i++){
-			if(i<10){
-				i="0"+i
-			}
-			str +='<img src="images/豪宅_000'+ i +'.png">';
-		}
-		oWrap.innerHTML = str;
-		go();
+		
+		go("wrap","豪宅_000","74");
 
-		function go(){
+		function go(className,imgSrc,num){//className:容器Id名字，imgSrc:图片名称前缀，num:图片数量
+			var zIndex = 0,
+			    str="",
+			    oWrap=document.getElementById(className),
+			    imgList = oWrap.getElementsByTagName("img");
+
+			for(var i=0;i<=num;i++){
+				if(i<10){
+					i="0"+i
+				}
+				str +='<img src="images/'+ imgSrc + i +'.png">';
+			}
+			oWrap.innerHTML = str;
 			timer = setInterval(function(){
-				delStyle()
+				for(var i=0;i<=num;i++){
+					imgList[i].setAttribute("class","")
+				}
 				zIndex++;
-				if(zIndex == 75){
+				if(zIndex == (num-0+1)){
 					zIndex = 0
 				}
 				imgList[zIndex].setAttribute("class","active")
 			},80);
 		}
-		function delStyle(){
-			for(var i=0;i<=74;i++){
-				imgList[i].setAttribute("class","")
-			}
-		}
+
 	</script>
 </body>
 </html>
