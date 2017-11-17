@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS-3D相册旋转拖拽</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{overflow:hidden;background:#000;}
+		#perspective{
+			perspective:800px;/*场景景深*/
+		}
+		#wrap{
+			position:relative;
+			width:133px;
+			height:200px;
+			border:0px solid #000;
+			margin:300px auto;
+			transform-style:preserve-3d;
+			transform:rotateX(-10deg) rotateY(0deg);
+		}
+		#wrap img{
+			position:absolute;
+			top:0;
+			left:0;
+			padding:3px;
+			border:2px solid #FFF;
+			border-radius:5px;
+			background:rgba(255,255,255,0.7);
+			transform:rotateX(0deg) rotateY(0deg);
+			-webkit-box-reflect:below 0 linear-gradient(transparent, white);/*倒影  谷歌内核特有*/
+			-webkit-box-reflect:below 0 -webkit-linear-gradient(transparent,transparent 70%,rgba(255,255,255,.3));
+			
+		}
+		.noselect{
+			-webkit-touch-callout: none; /* iOS Safari */
+			-webkit-user-select: none; /* Chrome/Safari/Opera */
+			-khtml-user-select: none; /* Konqueror */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently
+			not supported by any browser */
+		}
+	</style>
+</head>
+<body>
+	<div id="perspective"  class="noselect">
+		<div id="wrap" class="noselect">
+			<img class="noselect" src="images/1.jpg" alt="">
+			<img class="noselect" src="images/2.jpg" alt="">
+			<img class="noselect" src="images/3.jpg" alt="">
+			<img class="noselect" src="images/4.jpg" alt="">
+			<img class="noselect" src="images/5.jpg" alt="">
+			<img class="noselect" src="images/6.jpg" alt="">
+			<img class="noselect" src="images/7.jpg" alt="">
+			<img class="noselect" src="images/8.jpg" alt="">
+			<img class="noselect" src="images/9.jpg" alt="">
+			<img class="noselect" src="images/10.jpg" alt="">
+			<img class="noselect" src="images/11.jpg" alt="">
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		// //forEach是数组方法，非数组不能用
+		// oImg.forEach(function(){})
+		window.onload = function(){
+			var oImg = document.getElementsByTagName("img"),
+			oWrap = document.getElementById("wrap");
+
+			var Deg = 360 / oImg.length;
+			//forEach是数组方法，非数组不能用
+			Array.prototype.forEach.call(oImg,function(el,index){
+				el.style.transform = "rotateY("+Deg*index+"deg) translateZ(350px)";
+				el.style.zIndex = index;
+				el.style.transition = "transform 1s "+index*0.1+"s";
+			});
+
+			/*
+				点  拖  松
+				需求：
+					1.拖拽相册实际是改变容器的旋转读数
+					2.度数改变的数值的依据， 是鼠标的运动距离
+						每一次拖的时候的距离差
+						鼠标坐标怎么获取
+					距离差 = 现在鼠标的坐标 - 上一次鼠标的坐标
+
+					改变后的总度数是要累加这个差值的
+
+					惯性：
+						鼠标松开才会有的
+			 */
+			var nowX=0,nowY=0, // 现在的鼠标坐标
+				lastX = 0,lastY = 0, //上一次鼠标坐标
+				minusX = 0,	minusY = 0, //距离差
+				roX = -10,roY = 0; //总旋转读数
+			var timer;
+
+			document.onmousedown = function(ev){
+				var ev = ev||window.event; //获取event对象
+				//console.log("点")
+				//console.log(ev.clientX,ev.clientY);
+				lastX = ev.clientX;
+				lastY = ev.clientY;
+				this.onmousemove = function(ev){
+					var ev = ev||window.event; //获取event对象
+					nowX = ev.clientX;
+					nowY = ev.clientY;
+
+					minusX = nowX - lastX;
+					minusY = nowY - lastY;
+
+					roX -= minusY * 0.2; //总度数值
+					roY += minusX * 0.1
+
+					oWrap.style.transform = "rotateX("+ roX+"deg) rotateY("+roY+"deg)"
+
+					lastX = nowX;
+					lastY = nowY;
+
+				}
+				this.onmouseup = function(){
+					this.onmousemove = null;
+
+
+					timer = setInterval(function(){
+
+						minusX *= 0.98; 
+						minusY *= 0.98;
+
+						roX -= minusY * 0.2; //总度数值
+						roY += minusX * 0.1
+
+						oWrap.style.transform = "rotateX("+ roX+"deg) rotateY("+roY+"deg)"
+						
+						if(Math.abs(minusX) < 0.1 && Math.abs(minusY) < 0.1){
+							clearInterval(timer);
+						}
+
+					},1000/60);//定时器
+
+					this.onmouseup = null;
+				}
+			}
+
+		}
+		
+
+	</script>
+</body>
+</html>
