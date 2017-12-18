@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>高级DOM操作</title>
+</head>
+<style>
+	*{margin:0;padding:0;}
+	body{background:#ccc;overflow:hidden;position:relative;}
+	.balloon{
+		position:absolute;
+		left:0;
+		top:0;
+		width:160px;
+		height:160px;
+		background:#faf9f9;
+		border-radius:160px 160px 64px 160px;
+		transform:rotate(45deg);/*css3形变 旋转*/
+		/*盒子阴影 横向位移 纵向位移 羽化程度  半径 颜色 内外阴影*/
+		box-shadow:-8px -8px 80px -8px #873940 inset;
+	}
+	.balloon::after{
+		position:absolute;
+		bottom:0;
+		right:0;
+		content:"";
+		display:block;
+		width:0px;
+		height:0px;
+		border:8px solid transparent;
+		border-right-color:#873940;
+		transform:rotate(45deg);
+		border-radius:16px;
+	}
+</style>
+
+<body>
+	<!-- <div class="balloon"></div> -->
+
+	<script>
+		var num = 10;  //气球数量是10
+		var wH = window.innerHeight;//获取浏览器窗口高度
+		var wW = window.innerWidth;//获取浏览器宽度
+		var bZ = 160; //气球尺寸
+		var timer = null;//初始化定时器指针
+		init();
+		timer = setInterval(move,1000/30)
+		function init(){ // 初始化函数
+			var fragment = document.createDocumentFragment(); //创建节点片段
+			for(var i=0;i<num;i++){
+				var randomX = ~~(Math.random() * wW) - bZ;//用算法对随机数进行向下取整
+				randomX = Math.max(0,randomX);//输出两个数中最大的一个
+				//console.log(randomX)
+				var oBalloon = document.createElement("div");//创建一个div
+				oBalloon.className = "balloon";//初始化类名
+				oBalloon.style.top = wH - bZ + "px";
+				oBalloon.style.left = randomX + "px";
+				oBalloon.speed = ~~(Math.random() * 6) + 1;//1-5随机速度
+				fragment.appendChild(oBalloon);
+			}
+			document.body.appendChild(fragment);
+		}
+
+
+		document.body.addEventListener("click",function(e){
+			if(e.target.className.toLowerCase() === "balloon"){
+				//e.target.parentNode.removeChild(e.target);//删除当前点击的节点
+				boom.call(e.target,function(){
+					this.parentNode.removeChild(this);//删除当前点击的节点
+				}.bind(e.target));
+			}
+		})
+		
+		
+		function boom(cb){//爆炸动画
+			//点击的气球就是this 
+			this.timer = setInterval(function(){
+				if(this.offsetWidth < 10){
+					cb&&cb();//回调函数
+					clearInterval(this.timer);
+				}
+				this.speed++;//速度越来越快
+				this.style.width = this.offsetWidth - 10 +"px";
+				this.style.height = this.offsetHeight - 10 + "px";
+				this.style.top = this.offsetTop - this.speed + "px";
+			}.bind(this),1000/30)
+		}
+
+		function move(){ //运动模块
+			var oBalloons = document.querySelectorAll(".balloon");
+			//console.log(oBalloons)
+			for(var i=0,len=oBalloons.length;i<len;i++){
+				//循环让每一个气球top=当前top-移动量
+				oBalloons[i].style.top = oBalloons[i].offsetTop - oBalloons[i].speed +"px";
+			}
+		}
+
+
+
+
+
+
+
+
+
+			//requestAnimationFrame  H5 帧动画
+				// 1.无法设置时间间隔 根据cpu钟摆频率来的 13-16ms
+				// 2.递归使用
+				// 3.兼容性不好
+
+			
+			// var oBalloon = document.createElement("div");//创建一个div
+			// oBalloon.className = "balloon";//初始化类名
+			// document.body.appendChild(oBalloon)
+	</script>
+</body>
+</html>
