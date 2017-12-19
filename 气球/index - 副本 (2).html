@@ -43,18 +43,12 @@
 		var wW = window.innerWidth;//获取浏览器宽度
 		var bZ = 160; //气球尺寸
 		var timer = null;//初始化定时器指针
-		var timers = null;//初始化定时器指针
-		init(num);
+		init();
 
-		timer = setInterval(function(){ //移动气球
+		timer = setInterval(function(){
 			move();
 		},1000/30)
-
-		timers = setInterval(function(){ //每隔一秒添加一个气球
-			init(1)
-		},1000)
-
-		function init(num){ // 初始化函数
+		function init(){ // 初始化函数
 			var fragment = document.createDocumentFragment(); //创建节点片段
 			for(var i=0;i<num;i++){
 				var randomX = ~~(Math.random() * wW) - bZ;//用算法对随机数进行向下取整
@@ -62,7 +56,7 @@
 				//console.log(randomX)
 				var oBalloon = document.createElement("div");//创建一个div
 				oBalloon.className = "balloon";//初始化类名
-				oBalloon.style.top = wH - bZ + 160 + "px";
+				oBalloon.style.top = wH - bZ + "px";
 				oBalloon.style.left = randomX + "px";
 				oBalloon.speed = ~~(Math.random() * 6) + 1;//1-5随机速度
 				fragment.appendChild(oBalloon);
@@ -101,7 +95,7 @@
 			for(var i=0,len=oBalloons.length;i<len;i++){
 				//循环让每一个气球top=当前top-移动量
 				oBalloons[i].style.top = oBalloons[i].offsetTop - oBalloons[i].speed +"px";
-				if((oBalloons[i].offsetTop - oBalloons[i].speed) < -1000){
+				if((oBalloons[i].offsetTop - oBalloons[i].speed) < -200){
 					oBalloons[i].parentNode.removeChild(oBalloons[i])
 				}
 			}
