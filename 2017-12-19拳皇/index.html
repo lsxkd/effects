@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拳皇</title>
+</head>
+<style>
+	*{margin:0;padding:0;}
+	html{
+		width:100%;
+		height:100%;
+	}
+	body{
+		width:100%;
+		height:100%;
+		background:url("images/bg.jpg") no-repeat;
+		background-size:100% 100%;
+		overflow: hidden;
+	}
+	#site{
+		position:relative;
+		width:100%;
+		height:100%;
+		overflow:hidden;
+	}
+	img{
+		position:absolute;
+		bottom:50px;
+		min-width:200px;
+		min-height:350px;
+	}
+</style>
+<body>
+	<div id="site">
+		<img src="images/YAGAMI/stand.gif" alt="" id="MC">
+	</div>
+	<script>
+
+		
+		function Yagami(imgObj){
+			this.obj = imgObj;
+			this.Left = 0;
+			this.temer = null;
+		}
+		Yagami.prototype.action = function(code){
+			//console.log(code)
+			if(this.skill[code]){
+				this.skill[code].call(this);// 改变函数内部this指向
+			}
+		}
+		Yagami.prototype.skill = {
+			"40":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/7490881c38cfba5ef724e4ba.gif";
+			},
+			"38":function(){
+				//console.log("上")
+				this.obj.style.bottom = 150 + "px"
+				this.obj.src = "images/YAGAMI/advance.gif";
+			},
+			"39":function(){
+				//console.log("左")
+				this.timer = setInterval(function(){
+					this.Left += 5;
+					this.Left >=wW?this.Left=wW:this.Left;
+					this.obj.style.left = this.Left + "px"
+				}.bind(this),13);
+				this.obj.src = "images/YAGAMI/advance.gif";
+			},
+			"37":function(){
+				//console.log("右")
+				this.timer = setInterval(function(){
+					this.Left -= 5;
+					this.Left <=1?this.Left=0:this.Left;
+					this.obj.style.left = this.Left + "px"
+				}.bind(this),13);
+				this.obj.src = "images/YAGAMI/retreat.gif";
+			},
+			"65":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill01.gif";
+			},
+			"83":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill02.gif";
+			},
+			"68":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill03.gif";
+			},
+			"70":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill04.gif";
+			},
+			"71":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill05.gif";
+			},
+			"72":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill06.gif";
+			},
+			"74":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill07.gif";
+			},
+			"75":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill08.gif";
+			},
+			"76":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/ultimate_skill09.gif";
+			},
+			"81":function(){
+				//console.log("下")
+				this.obj.src = "images/YAGAMI/funny.gif";
+			},
+			"stop":function(){
+				this.obj.src = "images/YAGAMI/stand.gif";
+				this.obj.style.bottom = 50 +"px"
+			}// 静止
+
+		};// JSON对象
+		Yagami.prototype.stop = function(){
+			this.skill.stop.call(this);
+			clearInterval(this.timer);
+		}
+
+
+		var imgObj = document.getElementById("MC");
+		var MC = new Yagami(imgObj);
+		var wW = window.innerWidth -200;
+		document.onkeydown = key;
+		function key(ev){ //点击键盘获取事件
+			//console.log(ev.keyCode) //上:38 下:40 左:37 右:39
+			console.log(ev)
+			var code = ev.keyCode;
+			MC.action(code);
+			this.onkeyup = function(){
+				MC.stop();
+				this.onkeydown = key;
+			}
+			this.onkeydown = null
+		}
+	</script>
+</body>
+</html>
