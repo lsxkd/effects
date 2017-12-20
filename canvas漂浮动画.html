@@ -16,9 +16,11 @@
 		var canvas = document.getElementById("bubble");
 		var w = window.innerWidth;
 		var h = window.innerHeight;
+		var pX,pY; //鼠标当前位置坐标
+		var bubbleArray=[];//存放小球
+
 		canvas.width=w;
 		canvas.height=h;
-		var pX,pY; //鼠标当前位置坐标
 		resieze()
 		function resieze(){
 			window.onresize=arguments.callee;
@@ -62,6 +64,15 @@
 					this.yr=-this.yr;
 				}
 
+				
+				for(var j=0,len=bubbleArray.length;j<len;j++){
+					if(Math.sqrt(Math.pow(this.x-bubbleArray[j].x,2)+Math.pow(this.y-bubbleArray[j].y,2))-this.r-bubbleArray[j].r<0){
+						this.xr=-this.xr;
+						this.yr=-this.yr;
+						bubbleArray[j].xr=-bubbleArray[j].xr;
+						bubbleArray[j].yr=-bubbleArray[j].yr;
+					}
+				}
 				if(Math.sqrt(Math.pow(this.x-pX,2)+Math.pow(this.y-pY,2))<this.D&&this.r<this.maxR){
 					this.r++;
 				}else if(Math.sqrt(Math.pow(this.x-pX,2)+Math.pow(this.y-pY,2))>this.D&&this.r>6){
@@ -70,7 +81,7 @@
 				this.draw();
 			}
 		}
-		var bubbleArray=[];//存放小球
+		
 		function create(num){
 			for(var i=0;i<num;i++){
 				var bubble=new Bubble();//新生成一个小球
