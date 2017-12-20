@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>漂浮动画</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{overflow:hidden;}
+	</style>
+</head>
+<body>
+	<canvas id="bubble"></canvas>
+
+	<script>
+		//让canvas元素和浏览器高度一样
+		var canvas = document.getElementById("bubble");
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		canvas.width=w;
+		canvas.height=h;
+		var pX,pY; //鼠标当前位置坐标
+		resieze()
+		function resieze(){
+			window.onresize=arguments.callee;
+			w=window.innerWidth;
+			h=window.innerHeight;
+			canvas.width=w;
+			canvas.height=h;
+		} 
+		//如何使用canvas绘制图形
+		var canCon=canvas.getContext("2d");//获取到了转轴的宣纸
+		function random(min,max){//返回min-max之间的一个随机数
+			return Math.random()*(max-min)+min;
+		}
+		function Bubble(){}
+
+		var colorArray=["#99cccc","#FF6666","#990033","#006633","#993333"];
+		Bubble.prototype={
+			init:function(){
+				this.x=random(0,w);//小球的圆心坐标X轴位置
+				this.y=random(0,h);//小球的圆心坐标Y轴位置
+				this.r=random(3,6);//小球的半径
+				this.color=colorArray[Math.floor(random(0,5))];//小球的颜色
+				this.xr=random(-2,2);//一次移动的距离
+				this.yr=random(-2,2);//一次移动的距离
+				this.D=100;//鼠标附近47个px内的小球变大
+				this.maxR=30;//小球最大10像素
+			},
+			draw:function(){
+				canCon.fillStyle=this.color;//提笔粘墨
+				canCon.beginPath();//提笔重画
+				canCon.arc(this.x,this.y,this.r,0,Math.PI*2);//圆心位置 x,y,半径,构思
+				canCon.fill();//下笔作画
+			},
+			move:function(){
+				this.x+=this.xr;
+				this.y+=this.yr;
+				if(this.x-this.r<0||this.x+this.r>w){
+					this.xr=-this.xr;
+				}
+				if(this.y-this.r<0||this.y+this.r>w){
+					this.yr=-this.yr;
+				}
+
+				if(Math.sqrt(Math.pow(this.x-pX,2)+Math.pow(this.y-pY,2))<this.D&&this.r<this.maxR){
+					this.r++;
+				}else if(Math.sqrt(Math.pow(this.x-pX,2)+Math.pow(this.y-pY,2))>this.D&&this.r>6){
+					this.r--;
+				}
+				this.draw();
+			}
+		}
+		var bubbleArray=[];//存放小球
+		function create(num){
+			for(var i=0;i<num;i++){
+				var bubble=new Bubble();//新生成一个小球
+				bubble.init();
+				bubble.draw();
+				bubbleArray.push(bubble);
+			}
+		}
+		create(300); //创建300个点
+		setInterval(function(){
+			canCon.clearRect(0,0,w,h);
+			for(var item of bubbleArray){
+				item.move();
+			}
+		},1000/60)
+		canvas.onmousemove =function(){
+			var e=window.event||ev;
+			pX=e.clientX;
+			pY=e.clientY;
+		}
+
+	</script>
+</body>
+</html>
