@@ -21,38 +21,79 @@
 		<p style="text-indent:2em">生活，就是心怀最大的善意在荆棘中穿行，即使被刺伤，亦不改初衷;这世界，没有我们想象的美好，各种恶人各种诋毁各种打击各种敌对，但永远不要放弃对世界的善意，不要让恶人把自己变成恶人，不要让挫折拿走生活的勇气;不论周围的人如何刺伤身体，心中仍然要充盈善意，这样，自己不痛，与人无伤。</p>
 	</div>
 	<script>
-		// 代码开始
-		  // 获取要输出的内容
-		  var str=$("#test").html();
-	      // 合并多个空格;
-	      str=str.replace(/(\s){2,}/g," ");
-	      	// 定义变量为于表示位数
-	      	var index = 0;
-	        // 清空内容
-	        $("#test").html('');
-	        // 输出函数
-	        var documentWrite = function() {
-	        	// 逐字输出
-	        	var current = str.slice(index, index+1);
-	        	if (current == '<'){
-	        		index = str.indexOf('>', index) + 1;
-	        	}
-	        	else{
-	        		index++;
-	        	}
-	            // 不是最后两位时输出后追加下划线
-	            if (index < str.length-1){ 
-	            	$("#test").html(str.substring(0, index) + (index & 1 ? '_' : ''));
-	            }else{
-	            	// 内容输出完后清除定时器
-	            	$("#test").html(str.substring(0, index));
-	            	clearInterval(documentWrite);
-	            };
-	        };
-	        // 定时器,每200毫秒输出一个字
-	        setInterval(documentWrite,75);
+	// 代码开始
+	// 获取要输出的内容
+	var str=$("#test").html();
+	// 合并多个空格;
+	str=str.replace(/(\s){2,}/g," ");
+		// 定义变量为于表示位数
+		var index = 0;
+	// 清空内容
+	$("#test").html('');
+	// 输出函数
+	var documentWrite = function() {
+		// 逐字输出
+		var current = str.slice(index, index+1);
+		if (current == '<'){
+			index = str.indexOf('>', index) + 1;
+		}
+		else{
+			index++;
+		}
+	    // 不是最后两位时输出后追加下划线
+	    if (index < str.length-1){ 
+	    	$("#test").html(str.substring(0, index) + (index & 1 ? '_' : ''));
+	    }else{
+	    	// 内容输出完后清除定时器
+	    	$("#test").html(str.substring(0, index));
+	    	clearInterval(documentWrite);
+	    };
+	};
+	// 定时器,每200毫秒输出一个字
+	setInterval(documentWrite,75);
 
-	    </script>
+    </script>
+
+
+
+
+
+
+    <h2>js代码如下：</h2>
+	<div style="background:#f0eef5;">
+	<pre>
+	// 代码开始
+	// 获取要输出的内容
+	var str=$("#test").html();
+	// 合并多个空格;
+	str=str.replace(/(\s){2,}/g," ");
+		// 定义变量为于表示位数
+		var index = 0;
+	// 清空内容
+	$("#test").html('');
+	// 输出函数
+	var documentWrite = function() {
+		// 逐字输出
+		var current = str.slice(index, index+1);
+		if (current == '&lt;'){
+			index = str.indexOf('&gt;', index) + 1;
+		}
+		else{
+			index++;
+		}
+	    // 不是最后两位时输出后追加下划线
+	    if (index &lt; str.length-1){ 
+	    	$("#test").html(str.substring(0, index) + (index & 1 ? '_' : ''));
+	    }else{
+	    	// 内容输出完后清除定时器
+	    	$("#test").html(str.substring(0, index));
+	    	clearInterval(documentWrite);
+	    };
+	};
+	// 定时器,每200毫秒输出一个字
+	setInterval(documentWrite,75);
+	</pre>
+	</div>
 
 	</body>
 	</html>
