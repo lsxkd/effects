@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
+<title>Javascript 思维导图 绘制基础内容（值得一看）</title>
+<script src="./images/jquery-2.2.0.min.js"></script>
+<script>
+	(function (doc, win) { //换算rem
+		var docEl = doc.documentElement,
+	    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	    recalc = function () {
+			var clientWidth = docEl.clientWidth;
+			if (!clientWidth) return;
+			20 * (clientWidth / 200) >64 ? docEl.style.fontSize = '64px' : docEl.style.fontSize = 20 * (clientWidth / 200) + 'px';
+	    };
+		if (!doc.addEventListener) return;
+		win.addEventListener(resizeEvt, recalc, false);
+		doc.addEventListener('DOMContentLoaded', recalc, false);
+	})(document, window);
+</script>
+<style>
+	*{padding: 0;margin: 0;}
+	table,tbody,thead,tfoot,tr,td,ul,ol,li,a,img,b,h1,h2,h3,h4,h5,h6,em,i,b,span,div,p{font-style:normal;vertical-align:middle;font-weight:normal;border-collapse: collapse;border:0;text-decoration: none;list-style-type:none;}
+	div{outline:none;}
+	div,a,span{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+	body,html{width:100%;}
+	body{background:#f0eef5;color: #7d8b8d;font-family: Verdana,Arial,Helvetica,sans-serif;font-size:0.37rem;}
+	#main{width:90%;margin:1rem auto;background:#FFF;border-radius:0.2rem;}
+	#topics{width:90%;margin:0 auto;}
+	#topics .postTitle{font-size:0.58rem;font-weight: 400;margin-bottom:0.53rem;line-height: 1.8;color: #333;}
+	#topics .postTitle a{color: #333;}
+	.postBody{width:100%;margin:0 auto;}
+	#cnblogs_post_body {color: #333;line-height:1.8;padding: 0 0 1rem 0;}
+	#cnblogs_post_body ul {margin: 0 0 0.2rem;margin-left:1rem;padding:0;}
+	#cnblogs_post_body ul li{list-style-type: disc;}
+	#cnblogs_post_body p{margin:10px auto;text-indent: 0;}
+	#cnblogs_post_body p img{width:90%;margin:0 auto;}
+	#cnblogs_post_body p strong{}
+</style>
+</head>
+<body>
+	<div id="main">
+		<div id="topics">
+			<h1 class="postTitle">
+				<p>&nbsp;</p>
+				<a href="javascript:;">Javascript 思维导图 绘制基础内容（值得一看）</a>
+			</h1>
+			<div class="postBody">
+				<div id="cnblogs_post_body" class="blogpost-body">
+					
+					<ul>
+						<li>javascript变量</li>
+						<li>javascript运算符</li>
+						<li>javascript数组</li>
+						<li>javascript流程语句</li>
+						<li>javascript字符串函数</li>
+						<li>javascript函数基础</li>
+						<li>javascript基础DOM操作</li>
+						<li>文档对象模型DOM</li>
+						<li>javascript正则表达式</li>
+					</ul>
+					<p>能够认真看完就是一次对javascript的回顾与提升，可以很好的检验基础。</p>
+					<p><strong>javascript变量</strong></p>
+					<p><strong><img src="./images/031424088288890.gif" alt=""></strong></p>
+					<p>&nbsp;</p>
+					<h2>javascript运算符　　</h2>
+					<p><strong><img src="./images/031425524532800.gif" alt=""></strong></p>
+					<p>&nbsp;</p>
+					<h2>javascript数组　　</h2>
+					<p><strong><img src="./images/031426347503011.gif" alt=""></strong></p>
+					<p>&nbsp;</p>
+					<h2>javascript流程语句　　</h2>
+					<p><strong><img src="./images/031427375004707.gif" alt=""></strong></p>
+					<p>&nbsp;</p>
+					<p><strong>javascript字符串函数　　</strong></p>
+					<p><strong><img src="./images/031428564386592.gif" alt=""></strong></p>
+					<p>&nbsp;</p>
+					<h2>javascript函数基础　　</h2>
+					<p><strong><img src="./images/031429317505536.gif" alt=""></strong></p>
+					<p>&nbsp;</p>
+					<p><strong>javascript基础DOM操作　　　　</strong></p>
+					<p><strong><img src="./images/031430098606493.gif" alt=""></strong></p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<h2>DOM对象</h2>
+					<p><img src="./images/291310116771993.jpg" alt=""></p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<h2>BOM浏览器对象模型　　</h2>
+					<p><img src="./images/291311256619962.jpg" alt=""></p>
+					<p>&nbsp;</p>
+					<p><strong>javascript正则表达式　　</strong></p>
+					<p><strong><img src="./images/031430427829068.gif" alt=""></strong></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
