@@ -15,6 +15,50 @@
 	</div>
 
 	<div id="dCon"></div>
+
+
+
+	<p>&nbsp;</p>
+	<h2>html代码如下：</h2>
+	<div style="background:#f0eef5;">
+	<pre>
+	&lt;div&gt;
+		&lt;textarea name="" id="trCon" cols="30" rows="10"&gt;&lt;/textarea&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;input type="button" value="发表" onclick="PostCon()"&gt;
+		&lt;input type="button" value="清除" onclick="ClearCon()"&gt;
+	&lt;/div&gt;
+	&lt;div id="dCon"&gt;&lt;/div&gt;
+	</pre>
+	</div>
+	<h2>js代码如下：</h2>
+	<div style="background:#f0eef5;">
+	<pre>
+	window.onload=function(){
+		if(localStorage.getItem("k_con")!=null){
+			document.getElementById("dCon").innerHTML=localStorage.getItem("k_con")
+		}
+	}
+	function PostCon(){
+		var htmls=document.getElementById("dCon").innerHTML;
+		var trCon=document.getElementById("trCon").value;
+		var dCon=document.getElementById("dCon");
+		if(trCon == ""){
+			alert("请输入内容")
+			return false
+		}
+		htmls+="&lt;p&gt;" + trCon + "&lt;/p&gt;"
+		dCon.innerHTML = htmls;
+		localStorage.setItem("k_con",dCon.innerHTML)
+	}
+	function ClearCon(){
+		document.getElementById("trCon").value = ""
+		document.getElementById("dCon").innerHTML=""
+		localStorage.clear();
+	}
+	</pre>
+	</div>
 </body>
 <script>
 	window.onload=function(){

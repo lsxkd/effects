@@ -26,8 +26,121 @@
 		<input type="text" id="txtEUserName2" placeholder="请输入修改后的用户名">
 		<input type="button" value="修改" onclick="UpDate()">
 	</div>
-
 	<div id="dCon"></div>
+
+
+	<p>&nbsp;</p><p>&nbsp;</p>
+	<h2>html代码如下：</h2>
+	<div style="background:#f0eef5;">
+	<pre>
+
+	&lt;div&gt;
+		&lt;input type="text" id="txtAUserName" placeholder="请输入用户名" /&gt;
+		&lt;input type="password" id="txtAPwd" placeholder="请输入密码"&gt;
+		&lt;input type="button" value="添加" onclick="Add()"&gt;
+	&lt;/div&gt;
+
+	&lt;div&gt;
+		&lt;input type="text" id="txtSUserName" placeholder="请输入用户名" /&gt; 
+		&lt;input type="button" value="查询" onclick="Sel()"&gt;
+	&lt;/div&gt;
+
+	&lt;div&gt;
+		&lt;input type="text" id="txtDUserName" placeholder="请输入用户名" /&gt; 
+		&lt;input type="button" value="删除" onclick="Del()"&gt;
+	&lt;/div&gt;
+
+	&lt;div&gt;
+		&lt;input type="text" id="txtEUserName1" placeholder="请输入用户名" /&gt;
+		&lt;input type="text" id="txtEUserName2" placeholder="请输入修改后的用户名"&gt;
+		&lt;input type="button" value="修改" onclick="UpDate()"&gt;
+	&lt;/div&gt;
+
+	&lt;div id="dCon"&gt;&lt;/div&gt;
+	</pre>
+	</div>
+	<h2>js代码如下：</h2>
+	<div style="background:#f0eef5;">
+	<pre>
+	var db = openDatabase("myDB","1.0","test db",1024*10);
+
+	function Add(){//添加数据
+		var userName = document.getElementById("txtAUserName").value;
+		var pwd = document.getElementById("txtAPwd").value;
+		if(userName==""||pwd==""){
+			console.log("用户名或密码不能为空！")
+			return false;
+		}
+		db.transaction(function(fx){
+			fx.executeSql("create table if not exists UserInfor(UserName TEXT,Pwd TEXT)",[]);
+			fx.executeSql("insert into UserInfor values(?,?)",[userName,pwd],function(){
+				console.log("添加成功！");
+				Sel();
+			})
+		})
+	}
+	function Sel(){//查询数据
+		var sql = "select * from UserInfor where 1=1 ";
+		var username = document.getElementById("txtSUserName").value;
+		console.log(username)
+		if(username!=""){
+			sql+="and UserName='" + username +"'";
+		}
+		db.transaction(function(fx){
+			document.getElementById("dCon").innerHTML="";
+			fx.executeSql(sql,[],function(fx,rs){
+				console.log(rs)
+				var s="";
+				for(var i=0;i&lt;rs.rows.length;i++){
+					s+="&lt;div&gt;" + rs.rows.item(i).UserName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + rs.rows.item(i).Pwd + "&lt;/div&gt;";
+					document.getElementById("dCon").innerHTML = s
+				}
+			})
+		})
+	}
+
+	function Del(){//删除数据
+		var username = document.getElementById("txtDUserName").value;
+		if(username==""){
+			console.log("请输入要删除用户的用户名！")
+			return false;
+		}
+		db.transaction(function(fx){
+			fx.executeSql("delete from UserInfor where UserName=?",[username],function(){
+				console.log("删除成功！");
+				Sel();
+			})
+		})
+	}
+
+	function UpDate(){//修改数据
+		db.transaction(function(fx){
+			var username1 = document.getElementById("txtEUserName1").value
+			var username2 = document.getElementById("txtEUserName2").value
+			var sql = "update UserInfor set ";
+			if(username2!=""){
+				sql+="UserName='" + username2 +"' where 1=1 "
+			}else{
+				console.log("请输入修改后的用户名！")
+				return false;
+			}
+			if(username1!=""){
+				sql+="and UserName='" + username1 +"'";
+			}else{
+				console.log("请输入要修改的用户名！")
+				return false;
+			}
+
+			console.log(sql)
+			fx.executeSql(sql,[],function(){
+				console.log("修改成功");
+				Sel();
+			})
+		})
+	}
+
+	</pre>
+	</div>
 </body>
 <script>
 	var db = openDatabase("myDB","1.0","test db",1024*10);

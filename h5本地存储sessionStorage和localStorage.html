@@ -12,41 +12,45 @@
 
 	<p>&nbsp;</p>
 	<h2>html代码如下：</h2>
+	<div style="background:#f0eef5;">
 	<pre>
-		&lt;input type="text" id="txtUserName"&gt;
-		&lt;input type="text" id="txtPwd"&gt;
-		&lt;input type="button" onclick="myClick1()" value="按钮1"&gt;
-		&lt;input type="button" onclick="myClick2()" value="按钮2"&gt;
+	&lt;input type="text" id="txtUserName"&gt;
+	&lt;input type="text" id="txtPwd"&gt;
+	&lt;input type="button" onclick="myClick1()" value="按钮1"&gt;
+	&lt;input type="button" onclick="myClick2()" value="按钮2"&gt;
 	</pre>
+	</div>
 	<h2>js代码如下：</h2>
+	<div style="background:#f0eef5;">
 	<pre>
-		function myClick1(){
-			var userName=document.getElementById("txtUserName").value;
-			var pwd=document.getElementById("txtPwd").value
+	function myClick1(){
+		var userName=document.getElementById("txtUserName").value;
+		var pwd=document.getElementById("txtPwd").value
 
-			//页面关闭数据清空   存在缓存里面
-			// sessionStorage.setItem("k_username",userName);
-			// sessionStorage.setItem("k_pwd",pwd);
-			
-			//页面关闭还存在
-			localStorage.setItem("k_username",userName);
-			localStorage.setItem("k_pwd",pwd);
-			console.log("存储成功");
-		}
-		function myClick2(){
-			//页面关闭数据清空
-			// console.log(sessionStorage.getItem("k_username"));
-			// console.log(sessionStorage.getItem("k_pwd"))
-			
-			//页面关闭还存在  存在本地文件里面
-			//删除
-			localStorage.removeItem("k_username")
-			//删除所有
-			localStorage.clear();
-			console.log(localStorage.getItem("k_username"));
-			console.log(localStorage.getItem("k_pwd"))
-		}
+		//页面关闭数据清空   存在缓存里面
+		// sessionStorage.setItem("k_username",userName);
+		// sessionStorage.setItem("k_pwd",pwd);
+		
+		//页面关闭还存在
+		localStorage.setItem("k_username",userName);
+		localStorage.setItem("k_pwd",pwd);
+		console.log("存储成功");
+	}
+	function myClick2(){
+		//页面关闭数据清空
+		// console.log(sessionStorage.getItem("k_username"));
+		// console.log(sessionStorage.getItem("k_pwd"))
+		
+		//页面关闭还存在  存在本地文件里面
+		//删除
+		localStorage.removeItem("k_username")
+		//删除所有
+		localStorage.clear();
+		console.log(localStorage.getItem("k_username"));
+		console.log(localStorage.getItem("k_pwd"))
+	}
 	</pre>
+	</div>
 </body>
 <script>
 	function myClick1(){
