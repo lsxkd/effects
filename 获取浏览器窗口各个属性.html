@@ -11,6 +11,28 @@
 	<title>获取浏览器窗口各个属性</title>
 </head>
 <body>
+<h2>js代码如下：</h2>
+<div style="background:#f0eef5;">
+<pre>
+function windowStyle(){
+	document.writeln("<br>网页可见区域宽:" + document.body.clientWidth);
+	document.writeln("<br>网页可见区域高:" + document.body.clientHeight);
+	document.writeln("<br>网页可见区域宽:" + document.body.offsetWidth);
+	document.writeln("<br>网页可见区域高:" + document.body.offsetHeight);
+	document.writeln("<br>网页正文全文宽:" + document.body.scrollWidth);
+	document.writeln("<br>网页正文全文高:" + document.body.scrollHeight);
+	document.writeln("<br>网页被卷去的高:" + document.body.scrollTop);
+	document.writeln("<br>网页被卷去的左:" + document.body.scrollLeft);
+	document.writeln("<br>网页正文部分上:" + window.screenTop);
+	document.writeln("<br>网页正文部分左:" + window.screenLeft);
+	document.writeln("<br>屏幕分辨率的高:" + window.screen.height);
+	document.writeln("<br>屏幕分辨率的宽:" + window.screen.width);
+	document.writeln("<br>屏幕可用工作区高度:" + window.screen.availHeight);
+	document.writeln("<br>屏幕可用工作区宽度:" + window.screen.availWidth);
+}
+windowStyle();
+</pre>
+</div>
 	<script>
 		function windowStyle(){
 			document.writeln("<br>网页可见区域宽:" + document.body.clientWidth);
