@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>红绿灯倒计时</title>
+
+	<style>
+		.box{
+			overflow:hidden;
+			width:400px;
+			padding:10px;
+			background:black;
+			border-radius:20px;
+		}
+		.box div{
+			width:33.33%;
+			float:left;
+			text-align:center;
+		}
+		.red{
+			width:100px;
+			height:100px;
+			background:#D7D7D7;
+			border-radius:100px;
+			display:block;
+			margin:0 auto;
+			line-height: 100px;
+			font-size:80px;
+			color:#D7D7D7;
+		}
+		.yellow{
+			width:100px;
+			height:100px;
+			background:#D7D7D7;
+			border-radius:100px;
+			display:block;
+			margin:0 auto;
+			line-height: 100px;
+			font-size:80px;
+			color:#D7D7D7;
+		}
+		.green{
+			width:100px;
+			height:100px;
+			background:#D7D7D7;
+			border-radius:100px;
+			display:block;
+			margin:0 auto;
+			line-height: 100px;
+			font-size:80px;
+			color:#D7D7D7;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div><span class="green"></span></div>
+		<div><span class="yellow"></span></div>
+		<div><span class="red"></span></div>
+	</div>
+
+	<script>
+	window.onload = function(){
+		var time = 11;//可以设置红绿灯时间
+		exec();
+		setInterval(function(){
+			exec();
+		},1000*(time * 2 + 4));
+
+		function exec(){
+			//绿灯
+			total(11,'green','green');
+			//黄灯
+			setTimeout(function(){
+				total(4,'yellow','yellow');
+			},1000 * time);
+
+			//红灯
+			setTimeout(function(){
+				total(11,'red','red');
+			},1000 * (time + 4));
+		}
+
+
+		function total(time,colors,className){
+			var num = time;
+			var timer = setInterval(function(){
+				num--;
+				var CName = document.getElementsByClassName(className);
+				CName[0].innerHTML = num;
+				CName[0].style.background = colors;
+				if(num == 0){
+					clearInterval(timer);
+					CName[0].innerHTML = '';
+					CName[0].style.background = '';
+				}
+			},1000);
+		}
+
+		// function red(){
+		// 	var num = time;
+		// 	var timer = setInterval(function(){
+		// 		num--;
+		// 		var red = document.getElementsByClassName("red");
+		// 		red[0].innerHTML = num;
+		// 		red[0].style.background = 'red';
+		// 		if(num == -1){
+		// 			clearInterval(timer);
+		// 			red[0].innerHTML = '';
+		// 			red[0].style.background = '';
+		// 		}
+		// 	},1000);
+		// }
+
+		// function yellow(){
+		// 	var num = 4; //黄灯时间设置了3秒
+		// 	var timer = setInterval(function(){
+		// 		num--;
+		// 		var yellow = document.getElementsByClassName('yellow');
+		// 		yellow[0].innerHTML = num;
+		// 		yellow[0].style.background = 'yellow';
+		// 		if(num == -1){
+		// 			clearInterval(timer);
+		// 			yellow[0].innerHTML = '';
+		// 			yellow[0].style.background = '';
+		// 		}
+		// 	},1000)
+		// }
+
+
+		// function green(){
+		// 	var num = time; //绿灯时间设置了3秒
+		// 	var timer = setInterval(function(){
+		// 		num--;
+		// 		var green = document.getElementsByClassName('green');
+		// 		green[0].innerHTML = num;
+		// 		green[0].style.background = 'green';
+		// 		if(num == -1){
+		// 			clearInterval(timer);
+		// 			green[0].innerHTML = '';
+		// 			green[0].style.background = '';
+		// 		}
+		// 	},1000)
+		// }
+	}
+	</script>
+</body>
+</html>
