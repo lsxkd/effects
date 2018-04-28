@@ -19,20 +19,21 @@ function judgePlatform(){
     switch ( plus.os.name ) {  
         case "Android":  
         // Android平台: plus.android.*  
-        console.log(android)
+        alert(android)
         break;  
         case "iOS":  
         // iOS平台: plus.ios.*  
-        console.log(ios)
+        alert(ios)
         break;  
         default:  
         // 其它平台 
-        console.log('其他') 
+        alert('其他') 
         break;  
     }  
 } 
-plusReady()
 judgePlatform() 
+plusReady()
+
 </script>  
 </head>  
 <body>  
