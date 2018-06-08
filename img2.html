@@ -22,7 +22,10 @@
 			var reader = new FileReader();
 			reader.readAsDataURL(imgdata);
 			reader.onload = function(){
-				document.querySelector("#J_testImgBase64").value = this.result
+				img.src= this.result
+				document.body.appendChild(img)
+				// document.querySelector("#J_testImgBase64").value = this.result
+				console.log(img)
 			}
 
 		}
