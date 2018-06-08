@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<img src="http://blog.dlovel.com/effects/%E7%84%A6%E7%82%B9%E5%9B%BE/4845745_195609329636_2.jpg" alt="">
+
+	<script>
+	var url = document.querySelector("img").src;
+	console.log(url)
+	var xhr = new XMLHttpRequest();
+	var img = document.createElement("img")
+	var imgdata
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState === 4&& xhr.status === 200){
+			imgdata = xhr.response;
+			console.log(imgdata)
+
+			var reader = new FileReader();
+			reader.readAsDataURL(imgdata);
+			reader.onload = function(){
+				document.querySelector("#J_testImgBase64").value = this.result
+			}
+
+		}
+	}
+	xhr.open("GET",url,true);
+	xhr.responseType = "blob"
+	xhr.send(null)
+	</script>
+</body>
+</html>
