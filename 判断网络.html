@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+
+
+	<script src="jquery-2.1.1.js"></script>
+	<script>
+	function getImgError(){
+	  alert("Network disconnect!");
+	}
+	$().ready(function(){
+	  $("#btn-test").click(function(){
+	    var imgPath = "https://www.baidu.com/img/bdlogo.gif";
+	    var timeStamp = Date.parse(new Date());
+	    $("#img-test").attr("src", imgPath + "?timestamp=" + timeStamp);
+	  });
+	});
+	</script>
+</head>
+<body>
+	<img id="img-test" style="display:none;" onerror="getImgError()"/>
+  	<button id="btn-test">check status</button>
+
+</body>
+</html>

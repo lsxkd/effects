@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function cachingPicture(url,name){
+	        var xhr = new XMLHttpRequest();
+	        var imgdata
+	        xhr.onreadystatechange = function(){
+	          if(xhr.readyState === 4&& xhr.status === 200){
+	            imgdata = xhr.response;
+	            var reader = new FileReader();
+	            reader.readAsDataURL(imgdata);
+	            reader.onload = function(){
+	              // console.log(this.result)
+	              // localStorage.setItem(name, this.result);
+	              // localStorage.setItem(name, this.result);
+	            }
+	          }
+	        }
+	        xhr.open("GET",url,true);
+	        xhr.responseType = "blob"
+	        xhr.send(null)
+	      }
+	      cachingPicture("https://www.baidu.com/img/bdlogo.gif",1)
+	</script>
+</body>
+</html>
