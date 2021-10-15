@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时钟</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"/>
+	<link href="./css/reset.css" rel="stylesheet"/>
+	<link href="./css/index.css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="clock" id="app">
+		<audio autoplay="autopaly">
+		  <source src="renxi.mp3" type="audio/mp3">
+		</audio>
+		<div class="clock-box">
+			<hr :class="{'active':lineFlag}" />
+			<div class="year">
+				<p class="common-p" v-for="(item,index) in clock.year">{{timeData.year}}</p>
+			</div>
+			<div class="month" :style="{'transform': timeRunFlag?'rotate(' + (timeData.month - 1)*360/12 + 'deg)':''}">
+				<p class="common-p" v-for="(item,index) in clock.month" :style="{'transform': monthFlag?'rotate(-' + index*360/12 + 'deg)':''}">{{item}}</p>
+			</div>
+			<div class="day" :style="{'transform': timeRunFlag?'rotate(' + (timeData.day - 1)*360/31 + 'deg)':''}">
+				<p class="common-p" v-for="(item,index) in clock.day" :style="{'transform': dayFlag?'rotate(-' + index*360/31 + 'deg)':''}">{{item}}</p>
+			</div>
+			<div class="week" :style="{'transform': timeRunFlag?'rotate(' + (timeData.week - 1)*360/7 + 'deg)':''}">
+				<p class="common-p" v-for="(item,index) in clock.week" :style="{'transform': weekFlag?'rotate(-' + index*360/7 + 'deg)':''}">{{item}}</p>
+			</div>
+			<div class="hour" :style="{'transform': timeRunFlag?'rotate(' + (timeData.hour - 1)*360/24 + 'deg)':''}">
+				<p class="common-p" v-for="(item,index) in clock.hour" :style="{'transform': hourFlag?'rotate(-' + index*360/24 + 'deg)':''}">{{item}}</p>
+			</div>
+			<div class="minute" :style="{'transform': timeRunFlag?'rotate(' + (timeData.minute - 1)*360/60 + 'deg)':''}">
+				<p class="common-p" v-for="(item,index) in clock.minute" :style="{'transform': minuteFlag?'rotate(-' + index*360/60 + 'deg)':''}">{{item}}</p>
+			</div>
+			<div class="second" :style="{'transform': timeRunFlag?'rotate(' + timeData.second*360/60 + 'deg)':''}">
+				<p class="common-p" v-for="(item,index) in clock.second" ref="second" :style="{'transform':secondFlag?'rotate(-' + index*360/60 + 'deg)':''}">{{item}}</p>
+			</div>
+			<!-- :style="{'transform': 'rotate(-' + index*360/60 + 'deg)'}" -->
+		</div>
+	</div>
+	<script src="./js/jquery.min.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/rem.js"></script>
+	<p style="position:fixed;bottom:10px;width:100%;left:0;right:0;text-align:center;">Powered by&nbsp;<a class="" title="Powered by 蓝色星空岛" href="http://blogs.dlovel.com/" target="_blank">蓝色星空岛</a> - Designed with the&nbsp;<a href="http://blogs.dlovel.com/" title="蓝色星空岛">蓝色星空岛</a>&nbsp;-<a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备15017682号-5</a></p>
+</body>
+</html>

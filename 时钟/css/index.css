@@ -1,0 +1,143 @@
+body{
+    font-size:0.2rem;
+    background:#ffe;
+    font-family: '微软雅黑','宋体',sans-serif;
+    color: #231F20;
+}
+.clock-box-f{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin:0 5px;
+}
+
+
+.clock-box{
+    list-style: none;
+    margin: auto;
+    padding: 0;
+    width: 900px;
+    height: 900px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    line-height: 20px;
+    user-select: none;
+}
+.clock-box div{
+    margin:0 0.05rem;
+}
+.clock-box .year{
+    position: absolute;
+    z-index: 3;
+    width: 100px;
+    height: 20px;
+    top: 440px;
+    left: 400px;
+    transition: transform 0.3s ease-in-out 0s;
+    transform:rotate(0deg);
+}
+.clock-box .year p.common-p{
+    text-align: center;
+}
+.clock-box .month{
+    position: absolute;
+    z-index: 3;
+    width: 240px;
+    height: 20px;
+    top: 440px;
+    left: 330px;
+    transition: transform 0.3s ease-in-out 0s;
+    transform:rotate(0deg);
+}
+.clock-box .day{
+    position: absolute;
+    z-index: 3;
+    width: 360px;
+    height: 20px;
+    top: 440px;
+    left: 270px;
+    transition: transform 0.3s ease-in-out 0s;
+    transform:rotate(0deg);
+}
+.clock-box .week{
+    position: absolute;
+    z-index: 3;
+    width: 480px;
+    height: 20px;
+    top: 440px;
+    left: 210px;
+    transition: transform 0.3s ease-in-out 0s;
+    transform:rotate(0deg);
+}
+.clock-box .hour{
+    position: absolute;
+    z-index: 3;
+    width: 600px;
+    height: 20px;
+    top: 440px;
+    left: 150px;
+    transition: transform 0.3s ease-in-out 0s;
+    transform:rotate(0deg);
+}
+.clock-box .minute{
+    position: absolute;
+    z-index: 4;
+    width: 740px;
+    height: 20px;
+    top: 440px;
+    left: 80px;
+    transition: transform 0.3s ease-in-out 0s;
+    transform:rotate(0deg);
+}
+.clock-box .second{
+    position: absolute;
+    z-index: 5;
+    width: 880px;
+    height: 20px;
+    top: 440px;
+    left: 10px;
+    transition: transform 0.3s ease-in-out 0s;
+    transform:rotate(0deg);
+}
+p.common-p{
+    position: absolute;
+    width: 100%;
+    right: 0;
+    top: 0;
+    transition: transform 1s ease-in-out 0s;
+    transform:rotate(0deg);
+    text-align: right;  
+}
+hr{
+    height: 0;
+    width: 0%;
+    position: absolute;
+    z-index: 1;
+    border: #333 solid 0;
+    border-bottom-width: 1px;
+    margin: 10px 0 0 0;
+    left: 50%;
+    top: 50%;
+    transition: width 1s ease-in-out 0s;
+    overflow: visible;
+}
+
+hr.active{
+    width:49%;
+}
+hr.active:before{
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #333;
+    top: -2px;
+    left: 0;
+    position: absolute;
+
+}
